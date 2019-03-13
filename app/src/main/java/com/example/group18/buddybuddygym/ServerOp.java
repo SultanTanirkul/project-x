@@ -40,7 +40,7 @@ class ServerOp {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //add response
+                responder.respond(error.toString());
             }
         });
         return getRequest;
@@ -56,7 +56,7 @@ class ServerOp {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //add error code
+
             }
         }) {
             @Override
