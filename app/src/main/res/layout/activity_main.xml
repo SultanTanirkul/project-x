@@ -46,4 +46,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login_sign_in_button" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_no_account" />
 </LinearLayout>
