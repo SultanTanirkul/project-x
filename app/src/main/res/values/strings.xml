@@ -5,5 +5,6 @@
     <string name="login_forgot_pass">Forgot Your Password?</string>
     <string name="login_no_account">Don\'t have an account</string>
     <string name="login_sign_in_button">Login</string>
-    <string name="login_logo">Logotype</string>
+    <string name="login_logo">Logo Image</string>
+    <string name="login_bg">Background Image</string>
 </resources>
