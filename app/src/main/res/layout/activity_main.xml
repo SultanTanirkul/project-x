@@ -99,6 +99,13 @@
             android:text="Sign Out"
             android:visibility="gone"/>
 
+        <Button
+            android:id="@+id/profile_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
     </LinearLayout>
