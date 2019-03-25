@@ -1,10 +1,23 @@
 <resources>
-    <string name="app_name">BuddyBuddyGym</string>
+
+    <!--Login Activity Strings-->
+    <string name="app_name">LimberUP</string>
     <string name="login_username">Username</string>
-    <string name = "login_password">Password</string>
+    <string name="login_password">Password</string>
     <string name="login_forgot_pass">Forgot Your Password?</string>
     <string name="login_no_account">Don\'t have an account</string>
-    <string name="login_sign_in_button">Login</string>
+    <string name="login_sign_in_button">Log in</string>
     <string name="login_logo">Logo Image</string>
     <string name="login_bg">Background Image</string>
+
+
+    <!--Registration Activity Strings-->
+    <string name="register_username">Username</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password</string>
+    <string name="register_bio">Bio</string>
+    <string name="register_interests">Interests</string>
+    <string name="register_sign_up_button">Sign Up</string>
+    <string name="preference_file_key">token_id</string>
+
 </resources>
