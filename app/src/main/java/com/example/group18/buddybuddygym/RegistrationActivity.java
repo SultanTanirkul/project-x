@@ -26,7 +26,6 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText m_Bio_EditText = findViewById(R.id.bio_params);
         EditText m_Interests_EditText = findViewById(R.id.interests_params);
 
-
         m_SignUp_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
