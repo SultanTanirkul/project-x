@@ -56,7 +56,7 @@ class ServerOp {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                responder.respond(error.toString());
             }
         }) {
             @Override
