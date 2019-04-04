@@ -10,13 +10,13 @@ import android.widget.TextView;
 public class UserProfileActivity extends AppCompatActivity {
 
     // Declaration of Button type Elements
-    private Button m_PartnerUpButton = null;
+    private Button m_BuddyUpButton = null;
     private Button m_FollowButton    = null;
     private Button m_MessageButton   = null;
 
     //Declaration of TextView type elements
     private TextView m_FollowerCount = null;
-    private TextView m_PartnerCount  = null;
+    private TextView m_BuddyCount  = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +24,10 @@ public class UserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         //Initialization of Activity elements
         m_FollowButton = findViewById(R.id.follow_button);
-        m_PartnerUpButton = findViewById(R.id.partner_up_button);
+        m_BuddyUpButton = findViewById(R.id.buddy_up_button);
         m_MessageButton = findViewById(R.id.follow_button);
         m_FollowerCount = findViewById(R.id.follower_count);
-        m_PartnerCount = findViewById(R.id.partner_count);
+        m_BuddyCount = findViewById(R.id.buddy_count);
 
 
         //Follow Button's functionality to increase the follower count if clicked
@@ -38,12 +38,12 @@ public class UserProfileActivity extends AppCompatActivity {
             m_FollowerCount.setText(String.valueOf(folCount));
         });
 
-        //Partner Up Button's functionality to increase the partner count if clicked
-        m_PartnerUpButton.setOnClickListener((View v) -> {
-            int partnerCount = Integer.parseInt((m_PartnerCount.getText().toString()));
+        //Buddy Up Button's functionality to increase the buddy count if clicked
+        m_BuddyUpButton.setOnClickListener((View v) -> {
+            int buddyCount = Integer.parseInt((m_BuddyCount.getText().toString()));
 
-            partnerCount++;
-            m_PartnerCount.setText(String.valueOf(partnerCount));
+            buddyCount++;
+            m_BuddyCount.setText(String.valueOf(buddyCount));
         });
     }
 }
