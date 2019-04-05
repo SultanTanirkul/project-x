@@ -17,9 +17,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
 
     // Declaration of View
@@ -35,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         // Initialization of View Elements.
         m_Login_Button = findViewById(R.id.login_button);
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
             Map<String, String> userLoginParams = new HashMap<>();
             userLoginParams.put("username", m_Username_EditText.getText().toString());
-            userLoginParams.put("password", m_Password_EditText.getText().toString());
+            userLoginParams.put("password", Security.hashPassword(m_Password_EditText.getText().toString()));
             ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "",
                     "Loading. Please wait...", true);
             dialog.show();
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     getString(R.string.preference_file_key), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("username", m_Username_EditText.getText().toString());
-            editor.putString("password", m_Password_EditText.getText().toString());
+            editor.putString("password", Security.hashPassword(m_Password_EditText.getText().toString()));
             editor.apply();
 
             Log.v("ClientError", m_Username_EditText.getText().toString() + " " + m_Password_EditText.getText().toString());
