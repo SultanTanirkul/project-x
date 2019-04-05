@@ -4,51 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserProfileActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".UserProfileActivity">
+
+    <include
+        android:id="@+id/my_toolbar"
+        layout="@layout/tool_bar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="start">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cover_pic"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_cover_pic"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/profile_pic_border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/profile_pic_circle"
+                app:layout_constraintBottom_toBottomOf="@+id/cover_pic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cover_pic" />
+
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                app:layout_constraintLeft_toLeftOf="@id/profile_pic_border"
+                app:layout_constraintEnd_toEndOf="@id/profile_pic_border"
+                app:layout_constraintStart_toStartOf="@id/profile_pic_border"
+                app:layout_constraintTop_toTopOf="@id/profile_pic_border"
+                app:layout_constraintBottom_toBottomOf="@id/profile_pic_border"
+                />
+
+        </android.support.constraint.ConstraintLayout>
 
         <LinearLayout
+            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
 
             <Button
-                android:id="@+id/partner_up_button"
-                android:layout_width="match_parent"
+                android:id="@+id/buddy_up_button"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Partner UP" />
+                android:background="@drawable/buddy_up_button"
+                android:text="Buddy UP!"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/follow_button"
-                android:layout_width="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Follow" />
+                android:background="@drawable/follow_btn"
+                android:text="Follow"
+                android:textColor="@color/white"
+                tools:layout_editor_absoluteX="200dp"
+                tools:layout_editor_absoluteY="0dp" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/message_button"
-            android:layout_width="match_parent"
+            android:layout_width="310dp"
+            android:layout_margin="10dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/message_btn"
             android:text="Message" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/partner_count"
+                android:id="@+id/buddy_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100" />
