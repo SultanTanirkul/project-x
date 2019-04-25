@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.group18.buddybuddygym">
+    package="com.project.group18.limberup">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -29,10 +29,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".UserProfileActivity"
+            android:name="com.project.group18.limberup.UserProfileActivity"
             android:label="Profile" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.project.group18.limberup.RegistrationActivity" />
+        <activity android:name="com.project.group18.limberup.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

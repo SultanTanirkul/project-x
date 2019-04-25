@@ -1,4 +1,4 @@
-package com.example.group18.buddybuddygym;
+package com.project.group18.limberup;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.example.group18.buddybuddygym;
+package com.project.group18.limberup;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;

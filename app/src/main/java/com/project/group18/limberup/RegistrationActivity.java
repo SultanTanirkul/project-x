@@ -1,4 +1,4 @@
-package com.example.group18.buddybuddygym;
+package com.project.group18.limberup;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

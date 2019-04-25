@@ -1,4 +1,4 @@
-package com.example.group18.buddybuddygym;
+package com.project.group18.limberup;
 
 public class User {
     private String username;
