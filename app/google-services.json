@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "61009175001",
+    "firebase_url": "https://limber-up.firebaseio.com",
+    "project_id": "limber-up",
+    "storage_bucket": "limber-up.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61009175001:android:4d97a95ff0a7361c",
+        "android_client_info": {
+          "package_name": "com.project.group18.limberup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61009175001-8du15ku5fo26tehvnlmkrhrchns42llk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.group18.limberup",
+            "certificate_hash": "a0b6fa8971e38aee05422f42a3ad34e997532db9"
+          }
+        },
+        {
+          "client_id": "61009175001-m6qrmuq95lsqi71538j8omdc9h5kstu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcKIHIgXQ-EyWV_JLQgKXhCteNYmf4H7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61009175001-m6qrmuq95lsqi71538j8omdc9h5kstu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
