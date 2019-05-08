@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.group18.limberup">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -16,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -29,10 +31,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.project.group18.limberup.UserProfileActivity"
+            android:name="com.example.group18.buddybuddygym.CoreActivity"
+            android:label="@string/title_activity_core"></activity>
+        <activity
+            android:name=".UserProfileActivity"
             android:label="Profile" />
-        <activity android:name="com.project.group18.limberup.RegistrationActivity" />
-        <activity android:name="com.project.group18.limberup.MainActivity">
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
