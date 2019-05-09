@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "528875924876",
+    "firebase_url": "https://project-x-35dca.firebaseio.com",
+    "project_id": "project-x-35dca",
+    "storage_bucket": "project-x-35dca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528875924876:android:6980fc2ab5648ef6",
+        "android_client_info": {
+          "package_name": "com.project.group18.limberup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528875924876-p7qu44vulgqgte6g7k7rde7k2dsvdog0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.group18.limberup",
+            "certificate_hash": "a0b6fa8971e38aee05422f42a3ad34e997532db9"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8q4mxnWcZMjbM1WGIuKsVCy7YD66xMQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528875924876-orgvq44u7icvc8c1fqdnc176spdupn2r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
