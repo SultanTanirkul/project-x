@@ -1,4 +1,4 @@
-package com.example.group18.buddybuddygym;
+package com.project.group18.limberup;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;

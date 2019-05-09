@@ -3,6 +3,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private Button   m_Login_Button      = null;
     private Button   m_LogOut_Button     = null;
     private Button   m_Profile_Button    = null;
+    private Button   m_Activities_Button    = null;
 
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         m_ForgetPassLink = findViewById(R.id.link_forget_pass);
         m_LogOut_Button = findViewById(R.id.sign_out_button);
         m_Profile_Button = findViewById(R.id.profile_button);
-
+        m_Activities_Button = findViewById(R.id.activity_search_button);
+        changeLayout(View.GONE);
         // Validation if user is signed in.
         checkIfLogged();
 
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             Map<String, String> userLoginParams = new HashMap<>();
             userLoginParams.put("username", m_Username_EditText.getText().toString());
             userLoginParams.put("password", Security.hashPassword(m_Password_EditText.getText().toString()));
-            ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "",
+            dialog = ProgressDialog.show(MainActivity.this, "",
                     "Loading. Please wait...", true);
             dialog.show();
             serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/authenticate", userLoginParams ,(s) -> {
@@ -60,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
                     isSignIn(s);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    dialog.hide();
                 }
             }));
             dialog.hide();
-
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(m_Password_EditText.getWindowToken(), 0);
             imm.hideSoftInputFromWindow(m_Username_EditText.getWindowToken(), 0);
@@ -85,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
             startActivity(intent);
         });
+
+        m_Activities_Button.setOnClickListener((View v) ->{
+            Intent intent = new Intent(MainActivity.this, ActivityCategory.class);
+            startActivity(intent);
+        });
     }
 
     /**
@@ -96,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
      * @throws JSONException
      */
     private boolean isSignIn(String serverResponse) throws JSONException {
+
         JSONObject jObj = new JSONObject(serverResponse);
         boolean isLogged = jObj.getBoolean("success");
         String token = jObj.getString("token");
@@ -159,9 +169,11 @@ public class MainActivity extends AppCompatActivity {
         if(visibilityType == View.VISIBLE){
             m_LogOut_Button.setVisibility(View.GONE);
             m_Profile_Button.setVisibility(View.GONE);
+            m_Activities_Button.setVisibility(View.GONE);
         }else{
             m_LogOut_Button.setVisibility(View.VISIBLE);
             m_Profile_Button.setVisibility(View.VISIBLE);
+            m_Activities_Button.setVisibility(View.VISIBLE);
         }
     }
 
@@ -176,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
         sharedPref.edit().remove("password").apply();
         changeLayout(View.VISIBLE);
         Toast.makeText(this,"Signed Out successfully", Toast.LENGTH_LONG).show();
-
         return true;
     }
 }

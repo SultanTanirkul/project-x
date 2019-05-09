@@ -19,7 +19,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         Button m_SignUp_Button = findViewById(R.id.registration_button);
 
-
         EditText m_Username_EditText = findViewById(R.id.username_params);
         EditText m_Password_EditText = findViewById(R.id.password_params);
         EditText m_Email_EditText = findViewById(R.id.email_params);

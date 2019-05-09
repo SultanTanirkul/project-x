@@ -9,6 +9,7 @@
     <string name="login_sign_in_button">Log in</string>
     <string name="login_logo">Logo Image</string>
     <string name="login_bg">Background Image</string>
+    <string name="activity_search_button">Find Your Activity</string>
 
 
     <!--Registration Activity Strings-->
@@ -24,5 +25,18 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_core">Map</string>
+
+    <!--Activity Categories Strings-->
+    <string name="category_create_activity_hint">Cannot find your Activity? Create One</string>
+    <string name="category_create_activity">Create Activity</string>
+    <string name="category_football">Football</string>
+    <string name="category_basketball">Basketball</string>
+    <string name="category_tennis">Tennis</string>
+    <string name="category_cricket">Cricket</string>
+    <string name="category_golf">Golf</string>
+    <string name="category_volleyball">Volleyball</string>
+    <string name="category_swimming">Swimming</string>
+    <string name="category_other">Other</string>
+
 
 </resources>
