@@ -33,7 +33,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 userRegisterParams.put("username", m_Username_EditText.getText().toString());
                 Log.v("Test: ", m_Username_EditText.getText().toString());
-                userRegisterParams.put("password", Security.hashPassword(m_Password_EditText.getText().toString()));
+                userRegisterParams.put("password", m_Password_EditText.getText().toString());
                 Log.v("Test: ", m_Password_EditText.getText().toString());
 
                 userRegisterParams.put("email", m_Email_EditText.getText().toString());

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
             Map<String, String> userLoginParams = new HashMap<>();
             userLoginParams.put("username", m_Username_EditText.getText().toString());
-            userLoginParams.put("password", Security.hashPassword(m_Password_EditText.getText().toString()));
+            userLoginParams.put("password", m_Password_EditText.getText().toString());
             dialog = ProgressDialog.show(MainActivity.this, "",
                     "Loading. Please wait...", true);
             dialog.show();
@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                     isSignIn(s);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    dialog.hide();
                 }
             }));
             dialog.hide();
@@ -108,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
         JSONObject jObj = new JSONObject(serverResponse);
         boolean isLogged = jObj.getBoolean("success");
-        String token = jObj.getString("token");
         if(isLogged){
             SharedPreferences sharedPref = MainActivity.this.getSharedPreferences(
                     getString(R.string.preference_file_key), Context.MODE_PRIVATE);

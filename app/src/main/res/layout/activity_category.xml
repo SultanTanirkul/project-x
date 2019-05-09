@@ -34,6 +34,7 @@
         android:text="@string/category_create_activity"
         android:textColor="#fff"
         android:background="@drawable/create_activity_button"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"/>
 
