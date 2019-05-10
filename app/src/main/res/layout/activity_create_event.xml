@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateEvent"
+    tools:context=".EventCreateActivity"
     android:orientation="vertical"
     android:gravity="center|top"
     android:padding="40dp">
@@ -51,19 +51,32 @@
             android:text="@string/event_create_location"
             android:textStyle="bold"
             android:textColor="#000"/>
-
-        <EditText
-            android:id="@+id/editText4"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/editText4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/text_input_bg_search"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:padding="5dp" >
+                </EditText>
 
-            android:background="@drawable/text_input_bg_search"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="5dp" >
-        </EditText>
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:id="@+id/create_event_map_button"
+                android:background="@drawable/create_activity_button"
+                android:src="@drawable/ic_map_gray_48dp"
+                android:layout_margin="6dp">
+            </ImageView>
+        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

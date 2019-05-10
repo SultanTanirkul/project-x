@@ -1,20 +1,23 @@
 package com.project.group18.limberup;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 public class Event {
-    private String id = null;
-    private String title     = null;
-    private String host      = null;
+    private String id                   = null;
+    private String title                = null;
+    private String host                 = null;
     private EventCategoryEnum category  = null;
-    private String location  = null;
-    private int playerLimit  = -1;
-    private int playerNumber = -1;
-    private String date      = null;
-    private ArrayList<User> players = null;
+    private String location             = null;
+    private int playerLimit             = -1;
+    private int playerNumber            = -1;
+    private String date                 = null;
+    private ArrayList<User> players     = null;
+    private LatLng latLng               = null;
 
 
-    public Event(String id, String title, String host, EventCategoryEnum category, String location, int playerLimit, int playerNumber, String date)
+    public Event(String id, String title, String host, EventCategoryEnum category, String location, int playerLimit, int playerNumber, String date, LatLng latLng)
     {
         this.title = title;
         this.host = host;
@@ -25,6 +28,7 @@ public class Event {
         this.date = date;
         this.id = id;
         this.players = new ArrayList<>();
+        this.latLng = latLng;
     }
     public String getId(){return this.id;}
     public String getTitle(){ return this.title;}
@@ -34,6 +38,7 @@ public class Event {
     public int getPlayerLimit(){ return this.playerLimit;}
     public int getPlayerNumber(){ return this.playerNumber;}
     public String getDate(){return this.date;}
+    public LatLng getLat(){return this.latLng;}
 
     public boolean addPlayer(User user){
         if(user == null){

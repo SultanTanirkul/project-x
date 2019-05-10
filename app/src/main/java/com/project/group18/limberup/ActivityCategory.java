@@ -53,7 +53,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Football_Activity_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityEvents.class);
+                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,7 +61,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Basketball_Activity_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityEvents.class);
+                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +70,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Tennis_Activity_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityEvents.class);
+                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,7 +79,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Cricket_Activity_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityEvents.class);
+                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                 startActivity(intent);
             }
         });
@@ -87,7 +87,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Golf_Activity_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityEvents.class);
+                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                 startActivity(intent);
             }
         });
@@ -97,7 +97,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Volleyball_Activity_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityEvents.class);
+                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                 startActivity(intent);
             }
         });
@@ -106,7 +106,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Swimming_Activity_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityEvents.class);
+                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                 startActivity(intent);
             }
         });
@@ -115,7 +115,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Other_Activity_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityEvents.class);
+                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                 startActivity(intent);
             }
         });
@@ -124,7 +124,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Create_Category_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, CreateEvent.class);
+                Intent intent = new Intent(ActivityCategory.this, EventCreateActivity.class);
                 startActivity(intent);
             }
         });
