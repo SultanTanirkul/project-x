@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/logo" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="335dp"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:gravity="center_horizontal"
@@ -62,7 +62,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="335dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
@@ -90,20 +90,6 @@
             android:text="@string/login_no_account"
             android:textColor="#000"
             android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/sign_out_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sign Out"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/profile_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:visibility="gone" />
 
     </LinearLayout>
 

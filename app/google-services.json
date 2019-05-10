@@ -1,42 +1,38 @@
 {
   "project_info": {
-    "project_number": "61009175001",
-    "firebase_url": "https://limber-up.firebaseio.com",
-    "project_id": "limber-up",
-    "storage_bucket": "limber-up.appspot.com"
+    "project_number": "528875924876",
+    "firebase_url": "https://project-x-35dca.firebaseio.com",
+    "project_id": "project-x-35dca",
+    "storage_bucket": "project-x-35dca.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:61009175001:android:4d97a95ff0a7361c",
+        "mobilesdk_app_id": "1:528875924876:android:6980fc2ab5648ef6",
         "android_client_info": {
           "package_name": "com.project.group18.limberup"
         }
       },
       "oauth_client": [
         {
-          "client_id": "61009175001-8du15ku5fo26tehvnlmkrhrchns42llk.apps.googleusercontent.com",
+          "client_id": "528875924876-p7qu44vulgqgte6g7k7rde7k2dsvdog0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.project.group18.limberup",
             "certificate_hash": "a0b6fa8971e38aee05422f42a3ad34e997532db9"
           }
-        },
-        {
-          "client_id": "61009175001-m6qrmuq95lsqi71538j8omdc9h5kstu8.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBcKIHIgXQ-EyWV_JLQgKXhCteNYmf4H7w"
+          "current_key": "AIzaSyA8q4mxnWcZMjbM1WGIuKsVCy7YD66xMQY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "61009175001-m6qrmuq95lsqi71538j8omdc9h5kstu8.apps.googleusercontent.com",
+              "client_id": "528875924876-orgvq44u7icvc8c1fqdnc176spdupn2r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

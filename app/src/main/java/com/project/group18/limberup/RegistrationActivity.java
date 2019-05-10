@@ -19,7 +19,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         Button m_SignUp_Button = findViewById(R.id.registration_button);
 
-
         EditText m_Username_EditText = findViewById(R.id.username_params);
         EditText m_Password_EditText = findViewById(R.id.password_params);
         EditText m_Email_EditText = findViewById(R.id.email_params);
@@ -34,13 +33,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 userRegisterParams.put("username", m_Username_EditText.getText().toString());
                 Log.v("Test: ", m_Username_EditText.getText().toString());
-                userRegisterParams.put("password", Security.hashPassword(m_Password_EditText.getText().toString()));
+                userRegisterParams.put("password", m_Password_EditText.getText().toString());
                 Log.v("Test: ", m_Password_EditText.getText().toString());
 
                 userRegisterParams.put("email", m_Email_EditText.getText().toString());
                 userRegisterParams.put("bio", m_Bio_EditText.getText().toString());
                 userRegisterParams.put("interests", m_Interests_EditText.getText().toString());
-                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/signup", userRegisterParams ,(s) -> isRegistered(s)));
+                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/create", userRegisterParams ,(s) -> isRegistered(s)));
             }
         });
 
@@ -57,6 +56,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
         else{
             Log.e("Server", serverResponse);
+
             return false;
         }
     }

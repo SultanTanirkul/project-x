@@ -16,6 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CreateEvent"></activity>
+        <activity android:name=".ActivityEvents" />
+        <activity android:name=".Dashboard"></activity>
+        <activity android:name=".ActivityCategory" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -29,10 +33,17 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.project.group18.limberup.UserProfileActivity"
+            android:name=".CoreActivity"
+            android:label="@string/title_activity_core" />
+        <activity
+            android:name=".UserProfileActivity"
             android:label="Profile" />
-        <activity android:name="com.project.group18.limberup.RegistrationActivity" />
-        <activity android:name="com.project.group18.limberup.MainActivity">
+        <activity
+            android:name=".RegistrationActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
