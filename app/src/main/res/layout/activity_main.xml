@@ -91,28 +91,6 @@
             android:textColor="#000"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/sign_out_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sign Out"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/profile_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:visibility="gone" />
-
-
-        <Button
-            android:id="@+id/activity_search_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_search_button"
-            android:visibility="gone" />
-
     </LinearLayout>
 
 </LinearLayout>
