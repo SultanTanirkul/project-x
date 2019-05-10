@@ -30,10 +30,7 @@ class ServerOp {
         final StringRequest getRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {
-                        //add response;
-                        responder.respond(response);
-                    }
+                    public void onResponse(String response) { responder.respond(response); }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
