@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text="@string/event_create_player_limit"
             android:textColor="#000"
-            android:textStyle="bold">
+            android:textStyle="bold"/>
 
 
         <EditText
