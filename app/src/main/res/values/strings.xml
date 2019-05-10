@@ -38,5 +38,23 @@
     <string name="category_swimming">Swimming</string>
     <string name="category_other">Other</string>
 
+    <!--Events Strings-->
+    <string name="event_player_number">Number Of Players:<p> </p></string>
+    <string name="event_location">Location: <p> </p></string>
+    <string name="event_player_limit">Player Limit: <p> </p></string>
+    <string name="events_upcoming_events_txt">Upcoming Events</string>
+
+    <!--Event Create -->
+    <string name="event_create_event_name">Event Name</string>
+    <string name="event_create_player_number">Number of Players</string>
+    <string name="event_create_location">Location</string>
+    <string name="event_create_player_limit">Player Limit</string>
+    <string name="event_create_category">Category</string>
+    <string name="event_create_date">Date</string>
+    <string name="event_create_time">Time</string>
+    
+    <string name="event_create_create_button">Create</string>
+    <string name="event_create_back_button">Back</string>
+
 
 </resources>

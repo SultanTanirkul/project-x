@@ -39,7 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 userRegisterParams.put("email", m_Email_EditText.getText().toString());
                 userRegisterParams.put("bio", m_Bio_EditText.getText().toString());
                 userRegisterParams.put("interests", m_Interests_EditText.getText().toString());
-                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/signup", userRegisterParams ,(s) -> isRegistered(s)));
+                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/create", userRegisterParams ,(s) -> isRegistered(s)));
             }
         });
 
@@ -56,6 +56,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
         else{
             Log.e("Server", serverResponse);
+
             return false;
         }
     }
