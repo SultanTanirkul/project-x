@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class ActivityEvents extends AppCompatActivity {
+public class EventListActivity extends AppCompatActivity {
 
     private ArrayList<Event> events =  new ArrayList<>();
 
@@ -16,7 +16,7 @@ public class ActivityEvents extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
 
-        Event tempEvent = new Event("1","Louis's 5-Side", "Louis", EventCategoryEnum.FOOTBALL, "Surrey Sports Park, Richard Meyjes, Rd Guildford, GU2 7AD", 10, 16, "10:30");
+        Event tempEvent = new Event("1","Louis's 5-Side", "Louis", EventCategoryEnum.FOOTBALL, "Surrey Sports Park, Richard Meyjes, Rd Guildford, GU2 7AD", 10, 16, "10:30", null);
 
         events.add(tempEvent);
         events.add(tempEvent);

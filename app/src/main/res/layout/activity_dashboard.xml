@@ -23,11 +23,6 @@
         android:layout_margin="15dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-
-
-
-
-
     </LinearLayout>
 
     <LinearLayout

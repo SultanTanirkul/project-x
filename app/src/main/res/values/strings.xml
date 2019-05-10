@@ -57,4 +57,10 @@
     <string name="event_create_back_button">Back</string>
 
 
+    <!--Location Permission Strings -->
+    <string name="title_location_permission">Location Permission</string>
+    <string name="text_location_permission">In order to use map functionality confirm that you would like us to use your location.</string>
+    <string name="ok">OK</string>
+
+
 </resources>

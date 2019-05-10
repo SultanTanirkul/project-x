@@ -16,8 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateEvent"></activity>
-        <activity android:name=".ActivityEvents" />
+        <activity android:name=".EventCreateActivity"></activity>
+        <activity android:name=".EventListActivity" />
         <activity android:name=".Dashboard"></activity>
         <activity android:name=".ActivityCategory" />
         <!--
@@ -33,7 +33,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".CoreActivity"
+            android:name=".MapActivity"
             android:label="@string/title_activity_core" />
         <activity
             android:name=".UserProfileActivity"
