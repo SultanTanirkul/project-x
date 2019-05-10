@@ -35,7 +35,7 @@ public class Dashboard extends AppCompatActivity {
             Intent intent = new Intent(Dashboard.this, MainActivity.class);
             intent.putExtra(EXTRA_MESSAGE, "logout");
             startActivity(intent);
-
+            finish();
         });
 
         m_Event_Invitations_Button.setOnClickListener((View v) -> {
