@@ -3,19 +3,27 @@ package com.project.group18.limberup;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+
+import java.util.Arrays;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -55,6 +63,28 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         }
 
 
+        // Initialize the AutocompleteSupportFragment.
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+// Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
+// Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i("Client:", "Place: " + place.getName() + ", " + place.getId());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i("Client", "An error occurred: " + status);
+            }
+        });
+
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -64,6 +94,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 googleMap.clear();
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 googleMap.addMarker(markerOptions);
+
+                Intent intent = new Intent();
+                intent.putExtra("LatLng", latLng.latitude + " " + latLng.longitude);
+                setResult(EventCreateActivity.RESULT_OK, intent);
+                finish();
             }
         });
     }
@@ -110,4 +145,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             return true;
         }
     }
+
+
 }
