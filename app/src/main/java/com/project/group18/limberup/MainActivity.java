@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loggedIn();
 
         // Initialization of View Elements.
         m_Login_Button = findViewById(R.id.login_button);
@@ -48,26 +47,21 @@ public class MainActivity extends AppCompatActivity {
         m_RegistrationLink = findViewById(R.id.link_register);
         m_ForgetPassLink = findViewById(R.id.link_forget_pass);
 
-        // Handle logged in user and signout
-        if (getIntent() != null) {
-            Intent intent = getIntent();
-            String action = intent.getStringExtra(Dashboard.EXTRA_MESSAGE);
-            if (action != null) {
-                signOut();
-            } else if (checkIfLogged()) {
-                loggedIn();
-            }
+
+
+        // Handle previously logged in user
+        if (checkIfLogged()) {
+            loggedIn();
         }
 
         // Some functionality for Login Button
         m_Login_Button.setOnClickListener((View v) -> {
+            dialog = ProgressDialog.show(MainActivity.this, "",
+                    "Loading. Please wait...", true);
+
             Map<String, String> userLoginParams = new HashMap<>();
             userLoginParams.put("username", m_Username_EditText.getText().toString());
             userLoginParams.put("password", m_Password_EditText.getText().toString());
-
-            dialog = ProgressDialog.show(MainActivity.this, "",
-                    "Loading. Please wait...", true);
-            dialog.show();
 
             SharedPreferences sharedPref = MainActivity.this.getSharedPreferences(
                     getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -76,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("password", (m_Password_EditText.getText().toString()));
             editor.apply();
             ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-            serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/authenticate", userLoginParams, (s) -> login(s)));
+            serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/authenticate", userLoginParams, (s) -> {
+                dialog.hide();
+                login(s);
+            }));
 
-            dialog.hide();
         });
 
         // Some functionality for registration link/text.
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             ServerOp checkTokenReq = ServerOp.getInstance(getApplicationContext());
             Map<String, String> authPrams = new HashMap<>();
             authPrams.put("token", token);
-            checkTokenReq.addToRequestQueue(checkTokenReq.postRequest("https://limberup.herokuapp.com/checktoken", authPrams, (s) -> checkToken(s)));
+            checkTokenReq.addToRequestQueue(checkTokenReq.postRequest("https://limberup.herokuapp.com/api/verify", authPrams, (s) -> checkToken(s)));
             if (password != null && username != null) {
                 Map<String, String> userLoginParams = new HashMap<>();
                 userLoginParams.put("username", username);
@@ -117,18 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
         return false;
 
-    }
-
-
-    /**
-     * Method to show login items
-     */
-    private void loginLayout() {
-        m_Username_EditText.setVisibility(View.VISIBLE);
-        m_Password_EditText.setVisibility(View.VISIBLE);
-        m_RegistrationLink.setVisibility(View.VISIBLE);
-        m_Login_Button.setVisibility(View.VISIBLE);
-        m_ForgetPassLink.setVisibility(View.VISIBLE);
     }
 
     private void checkToken(String s){
@@ -150,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("token", response.getString("token"));
                 editor.apply();
                 loggedIn();
+
             }
         }
         catch (JSONException e) {
@@ -177,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
         sharedPref.edit().remove("username").apply();
         sharedPref.edit().remove("password").apply();
         sharedPref.edit().remove("token").apply();
-        loginLayout();
         Toast.makeText(this, "Signed Out successfully", Toast.LENGTH_LONG).show();
         return true;
     }
