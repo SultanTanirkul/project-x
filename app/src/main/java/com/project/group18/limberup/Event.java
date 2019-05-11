@@ -26,7 +26,7 @@ public class Event {
         this.activity = activity;
         this.location = location;
         this.playerLimit = playerLimit;
-        this.playerNumber = playerNumber;
+        this.playerNumberMin = playerNumber;
         this.date = date;
         this.id = id;
         this.participants = new ArrayList<>();
@@ -34,6 +34,7 @@ public class Event {
 
     public Event(JSONObject eventJson){
         try {
+            this.id = eventJson.getString("id");
             this.title = eventJson.getString("name");
             this.host = eventJson.getString("host");
             this.activity = eventJson.getString("activity");
@@ -53,10 +54,10 @@ public class Event {
 
     public String getId(){return this.id;}
     public String getTitle(){ return this.title;}
-    public String getHoster(){ return this.host;}
+    public String getHost(){ return this.host;}
     public String getActivity(){ return this.activity;}
     public int[] getLocation(){ return this.location;}
     public int getPlayerLimit(){ return this.playerLimit;}
-    public int getPlayerNumber(){ return this.playerNumber;}
+    public int getPlayerNumber(){ return this.playerNumberMin;}
     public String getDate(){return this.date;}
 }
