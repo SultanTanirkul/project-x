@@ -47,7 +47,7 @@ public class ActivityCategory extends AppCompatActivity {
         m_Activities_Create_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, ActivityCategory.class);
+                Intent intent = new Intent(ActivityCategory.this, EventCreateActivity.class);
                 startActivity(intent);
             }
         });
