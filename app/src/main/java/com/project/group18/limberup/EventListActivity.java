@@ -1,4 +1,4 @@
-package com.project.group18.limberup;
+/*package com.project.group18.limberup;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,4 +45,4 @@ public class EventListActivity extends AppCompatActivity {
         eventListView.setAdapter(adapter);
 
     }
-}
+}*/

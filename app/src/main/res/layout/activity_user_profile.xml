@@ -6,140 +6,156 @@
     tools:context=".UserProfileActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<FrameLayout
+    <FrameLayout
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="start">
+        >
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="start">
 
-            <ImageView
-                android:id="@+id/cover_pic"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/profile_cover_pic"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/cover_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_cover_pic"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <ImageView
-                android:id="@+id/profile_pic_border"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/profile_pic_border"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/profile_pic_circle"
+                    app:layout_constraintBottom_toBottomOf="@+id/cover_pic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cover_pic"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_pic_border"
+                    app:layout_constraintEnd_toEndOf="@id/profile_pic_border"
+                    app:layout_constraintLeft_toLeftOf="@id/profile_pic_border"
+                    app:layout_constraintStart_toStartOf="@id/profile_pic_border"
+                    app:layout_constraintTop_toTopOf="@id/profile_pic_border"
+                    />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/profile_pic_circle"
-                app:layout_constraintBottom_toBottomOf="@+id/cover_pic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cover_pic"/>
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_picture"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:layout_constraintBottom_toBottomOf="@id/profile_pic_border"
-                app:layout_constraintEnd_toEndOf="@id/profile_pic_border"
-                app:layout_constraintLeft_toLeftOf="@id/profile_pic_border"
-                app:layout_constraintStart_toStartOf="@id/profile_pic_border"
-                app:layout_constraintTop_toTopOf="@id/profile_pic_border"
-                />
+                <Button
+                    android:id="@+id/buddy_up_button"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/buddy_up_button"
+                    android:text="Buddy UP!"
+                    android:textColor="@color/white" />
 
+                <Button
+                    android:id="@+id/follow_button"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/follow_btn"
+                    android:text="Follow"
+                    android:textColor="@color/white"
+                    tools:layout_editor_absoluteX="200dp"
+                    tools:layout_editor_absoluteY="0dp" />
 
-        </android.support.constraint.ConstraintLayout>
-
-        <LinearLayout
-            android:gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:paddingTop="15dp">
+            </LinearLayout>
 
             <Button
-                android:id="@+id/buddy_up_button"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_width="150dp"
+                android:id="@+id/message_button"
+                android:layout_width="310dp"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/buddy_up_button"
-                android:text="Buddy UP!"
-                android:textColor="@color/white" />
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/message_btn"
+                android:text="Message" />
 
-            <Button
-                android:id="@+id/follow_button"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_width="150dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/follow_btn"
-                android:text="Follow"
-                android:textColor="@color/white"
-                tools:layout_editor_absoluteX="200dp"
-                tools:layout_editor_absoluteY="0dp" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/buddy_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" | " />
+
+                <TextView
+                    android:id="@+id/follower_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="500" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Henry"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="So Who am I?"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/user_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod elementum commodo. In interdum sollicitudin libero, eu tincidunt ex laoreet eu. Donec faucibus, odio sed feugiat." />
+
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/message_button"
-            android:layout_width="310dp"
-            android:layout_margin="10dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/message_btn"
-            android:text="Message" />
-
-        <LinearLayout
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:background="#99000000"
+            android:visibility="gone"
+            />
 
-            <TextView
-                android:id="@+id/buddy_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100" />
+    </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" | " />
-
-            <TextView
-                android:id="@+id/follower_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="500" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/user_bio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod elementum commodo. In interdum sollicitudin libero, eu tincidunt ex laoreet eu. Donec faucibus, odio sed feugiat." />
-
-    </LinearLayout>
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#99000000"
-        android:visibility="gone"
-        />
-    >
-</FrameLayout>
 </ScrollView>
