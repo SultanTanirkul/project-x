@@ -22,7 +22,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".EventCreateActivity" />
         <activity android:name=".EventListActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".ActivityCategory" />
