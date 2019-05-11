@@ -63,6 +63,14 @@
             android:text="Explore"
             />
 
+        <Button
+            android:id="@+id/dashboard_feed_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Feed"
+            />
+
+
     </LinearLayout>
 
 </LinearLayout>
