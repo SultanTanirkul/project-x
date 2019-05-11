@@ -9,7 +9,7 @@ public class Activity {
 
     public Activity(JSONObject activityJson){
         try {
-            id = activityJson.getString("id");
+            id = activityJson.getString("_id");
             name = activityJson.getString("name");
         } catch (JSONException e){
             e.printStackTrace();

@@ -1,34 +1,27 @@
 package com.project.group18.limberup;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.support.v7.widget.GridLayout;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.android.volley.Request;
 import com.project.group18.limberup.Activity;
 
 public class ActivityCategory extends AppCompatActivity {
-
-    // Button declaration to get to activity list
-    private Button m_Football_Activity_Button   = null;
-    private Button m_Basketball_Activity_Button = null;
-    private Button m_Tennis_Activity_Button     = null;
-    private Button m_Cricket_Activity_Button    = null;
-    private Button m_Golf_Activity_Button       = null;
-    private Button m_Volleyball_Activity_Button = null;
-    private Button m_Swimming_Activity_Button   = null;
-    private Button m_Other_Activity_Button      = null;
-    private Button m_Create_Category_Button     = null;
-
     private ArrayList<Activity> activities = new ArrayList<>();
 
 
@@ -36,130 +29,82 @@ public class ActivityCategory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Button Functionality
         setContentView(R.layout.activity_category);
-
+        SharedPreferences sharedPref = ActivityCategory.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", null);
+        HashMap params = new HashMap<>();
+        params.put("token", token);
         ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        Request req = serverOp.getRequest("https://limberup.herokuapp.com/api/activity/read", (s) -> {
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/activity/read", params, (s) ->{
             try {
-                Log.i("---->", "setActivities: ");
                 JSONArray response = new JSONArray(s);
                 setActivities(response);
+                setupActivityGrid();
             } catch(JSONException e){
                 Log.i("---->", "setActivities: " + e.toString());
             }
-        });
-        serverOp.addToRequestQueue(req);
-
-
-        m_Football_Activity_Button = findViewById(R.id.activity_category_football);
-        m_Basketball_Activity_Button = findViewById(R.id.activity_category_basketball);
-        m_Tennis_Activity_Button = findViewById(R.id.activity_category_tennis);
-        m_Cricket_Activity_Button = findViewById(R.id.activity_category_cricket);
-        m_Golf_Activity_Button = findViewById(R.id.activity_category_golf);
-        m_Volleyball_Activity_Button = findViewById(R.id.activity_category_volleyball);
-        m_Swimming_Activity_Button = findViewById(R.id.activity_category_swimming);
-        m_Other_Activity_Button = findViewById(R.id.activity_category_other);
-        m_Create_Category_Button = findViewById(R.id.create_activity_bt);
-
-        // Button Functionality
-        buttonFunctions();
+        }));
     }
 
 
     public void setActivities(JSONArray activities) throws JSONException{
             for (int i = 0; i < activities.length(); i++) {
                 this.activities.add(new Activity(activities.getJSONObject(i)));
-                Log.i("---->", "setActivities: " + this.activities.get(i).name);
             }
-
+            Log.i("---->", "setActivities: " + this.activities.size());
     }
 
 
 
 
     // Functions to definition of the category button
-    private void buttonFunctions()
-    {
-        // Football Category
-        m_Football_Activity_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
+    private void setupActivityGrid() {
+        GridLayout gridLayout = (GridLayout) findViewById(R.id.activityGrid);
 
-                startActivity(intent);
-            }
-        });
-        // Basketball Category
-        m_Basketball_Activity_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
-                startActivity(intent);
-            }
-        });
+        gridLayout.removeAllViews();
 
-        // Tennis Activity
-        m_Tennis_Activity_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
-                startActivity(intent);
+        int total = activities.size();
+        int column = 2;
+        if(column > total && total != 0){
+            column = total;
+        }
+        int row = total / column;
+        gridLayout.setColumnCount(column);
+        gridLayout.setRowCount(row + 1);
+        for (int i = 0, c = 0, r = 0; i < total; i++, c++) {
+            if (c == column) {
+                c = 0;
+                r++;
             }
-        });
+            final Activity currentActivity = activities.get(i);
+            Button button = new Button(this);
+            button.setWidth(gridLayout.getWidth()/2);
+            button.setText(currentActivity.name);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
+                    intent.putExtra("id", currentActivity.id);
+                    startActivity(intent);
+                }
+            });
 
-        // Cricket Activity
-        m_Cricket_Activity_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
-                startActivity(intent);
+            button.setLayoutParams(new GridLayout.LayoutParams());
+
+            GridLayout.Spec rowSpan = GridLayout.spec(GridLayout.UNDEFINED, 1);
+            GridLayout.Spec colspan = GridLayout.spec(GridLayout.UNDEFINED, 1);
+            if (r == 0 && c == 0) {
+                Log.e("", "spec");
+                colspan = GridLayout.spec(GridLayout.UNDEFINED, 2);
+                rowSpan = GridLayout.spec(GridLayout.UNDEFINED, 2);
             }
-        });
-        // Golf Activity
-        m_Golf_Activity_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
-                startActivity(intent);
-            }
-        });
+            GridLayout.LayoutParams gridParam = new GridLayout.LayoutParams(
+                    rowSpan, colspan);
+            gridLayout.addView(button, gridParam);
 
 
-        // Volleyball Activity
-        m_Volleyball_Activity_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Swimming Activity
-        m_Swimming_Activity_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Swimming Activity
-        m_Other_Activity_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Create Category
-        m_Create_Category_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityCategory.this, EventCreateActivity.class);
-                startActivity(intent);
-            }
-        });
+        }
     }
 
 
