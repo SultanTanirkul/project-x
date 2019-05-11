@@ -23,6 +23,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class EventCreateActivity extends AppCompatActivity implements View.OnClickListener{
@@ -84,7 +85,7 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
-
+            Date dt = new Date();
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
@@ -97,6 +98,8 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
 
                         }
                     }, mYear, mMonth, mDay);
+            c = Calendar.getInstance();
+            c.setTime(dt);
             datePickerDialog.show();
         }
         if (v == m_Date_Time_Picker) {
@@ -143,12 +146,7 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(this, "Min Number of Players cannot be greater than Player Limit", Toast.LENGTH_LONG).show();
             }else
             {
-                Event event = new Event(placeId, m_Event_Name.getText().toString(), "DummyHost",
-                        EventCategoryEnum.FOOTBALL, m_Event_location.getText().toString(),
-                        Integer.parseInt(m_Max_Player_Number.getText().toString()),
-                        Integer.parseInt(m_Min_Player_Number.getText().toString()),
-                        m_Date_Text.getText().toString(),
-                        m_Time_Text.getText().toString(), latLng);
+
             }
         }
     }
