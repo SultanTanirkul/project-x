@@ -23,6 +23,7 @@ import com.project.group18.limberup.Activity;
 
 public class ActivityCategory extends AppCompatActivity {
     private ArrayList<Activity> activities = new ArrayList<>();
+    private Button m_Activities_Create_Button = null;
 
 
 
@@ -45,6 +46,16 @@ public class ActivityCategory extends AppCompatActivity {
                 Log.i("---->", "setActivities: " + e.toString());
             }
         }));
+
+        m_Activities_Create_Button = findViewById(R.id.create_activity_bt   );
+        m_Activities_Create_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityCategory.this, EventCreateActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -84,9 +95,9 @@ public class ActivityCategory extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
-                    intent.putExtra("id", currentActivity.id);
-                    startActivity(intent);
+                    //Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
+                    //intent.putExtra("id", currentActivity.id);
+                    //startActivity(intent);
                 }
             });
 
