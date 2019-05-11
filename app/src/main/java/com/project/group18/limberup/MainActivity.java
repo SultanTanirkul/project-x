@@ -185,6 +185,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        dialog.dismiss();
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        dialog.dismiss();
+    }
 
 
 
