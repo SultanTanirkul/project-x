@@ -36,9 +36,9 @@ public class ExploreArrayAdapter extends ArrayAdapter<User> {
         TextView userName_Age = view.findViewById(R.id.explore_user_name_age);
         TextView userInterests = view.findViewById(R.id.explore_user_interests);
 
-        profilePic.setImageURI(Uri.parse(user.getImage()));
-        userName_Age.setText(user.getUsername() + ", "+ user.getAge());
-        userInterests.setText(user.getInterests());
+//        profilePic.setImageURI(Uri.parse(user.getImage()));
+//        userName_Age.setText(user.getUsername() + ", "+ user.getAge());
+//        userInterests.setText(user.getInterests());
         return view;
     }
 }
