@@ -1,15 +1,19 @@
 /*package com.project.group18.limberup;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EventListActivity extends AppCompatActivity {
 
@@ -19,30 +23,32 @@ public class EventListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
 
+        SharedPreferences sharedPref = EventListActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", null);
+        HashMap params = new HashMap<>();
+        params.put("token", token);
+        params.put("activity", getIntent().getStringExtra("id"));
         ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/activity/read", params, (s) ->{
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/event/read", params, (s) ->{
             try {
+                Log.i("---->", "setActivities: " + s);
                 JSONArray response = new JSONArray(s);
-                setActivities(response);
-                setupActivityGrid();
+                setEvents(response);
             } catch(JSONException e){
                 Log.i("---->", "setActivities: " + e.toString());
             }
         }));
-        Event tempEvent = new Event("1","Louis's 5-Side", "Louis", EventCategoryEnum.FOOTBALL, "Surrey Sports Park, Richard Meyjes, Rd Guildford, GU2 7AD", 10, 16, "10:30", null);
+    }
 
-        events.add(tempEvent);
-        events.add(tempEvent);
-        events.add(tempEvent);
-        events.add(tempEvent);
-        events.add(tempEvent);
-        events.add(tempEvent);
+    public void setEvents(JSONArray response) throws JSONException{
 
+        for(int i = 0; i < response.length(); i++){
+            events.add(new Event(response.getJSONObject(i)));
+        }
         ArrayAdapter<Event> adapter =  new EventArrayAdapter(this, 0, events);
 
         ListView eventListView = findViewById(R.id.events_event_list);
 
         eventListView.setAdapter(adapter);
-
     }
 }*/

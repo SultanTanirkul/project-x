@@ -39,8 +39,8 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
 
         title.setText(event.getTitle());
         playerLimit.setText(String.valueOf(event.getPlayerLimit()));
-        playerNumber.setText(String.valueOf(event.getPlayerNumberMin()));
-        location.setText(event.getLocation());
+        playerNumber.setText(String.valueOf(event.getPlayerNumber()));
+        location.setText(event.getLocation()[0] + ", " + event.getLocation()[1]);
         date.setText(event.getDate());
 
         return view;
