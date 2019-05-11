@@ -24,7 +24,9 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EventCreateActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -133,7 +135,8 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
 
         if(v == m_Create_Button)
         {
-            if(m_Event_Name.getText().toString().isEmpty()
+            if(
+                    m_Event_Name.getText().toString().isEmpty()
                     || m_Min_Player_Number.getText().toString().isEmpty()
                     || m_Event_location.getText().toString().isEmpty()
                     || m_Event_Name.getText().toString().isEmpty()
@@ -146,7 +149,19 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(this, "Min Number of Players cannot be greater than Player Limit", Toast.LENGTH_LONG).show();
             }else
             {
+                ServerOp createEvent = ServerOp.getInstance(getApplicationContext());
+                Map<String, String> eventPrams = new HashMap<>();
+                eventPrams.put("name", m_Event_Name.getText().toString());
+                eventPrams.put("token", m_Min_Player_Number.getText().toString());
+                eventPrams.put("token", m_Event_Name.getText().toString());
+                eventPrams.put("token", m_Max_Player_Number.getText().toString());
+                eventPrams.put("token", m_Date_Text.getText().toString());
+                eventPrams.put("token", m_Time_Text.getText().toString());
 
+                createEvent.addToRequestQueue(createEvent.postRequest("https://limberup.herokuapp.com/api/event/create", eventPrams, (s) -> {
+                    Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+
+                }));
             }
         }
     }

@@ -45,12 +45,12 @@ public class ExploreArrayAdapter extends ArrayAdapter<User>{
 
         Picasso.get().load("https://cdn.igromania.ru/mnt/articles/9/8/4/5/9/7/27170/html/img/59ab0985c3701a36.jpg").into(profilePic, new Callback() {
             @Override public void onSuccess() {
-                Toast.makeText(getContext(), "Images are downloaded.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Images are downloaded.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(Exception e) {
-                Toast.makeText(getContext(), "Images are not downloaded.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Images are not downloaded.", Toast.LENGTH_SHORT).show();
 
             }
 

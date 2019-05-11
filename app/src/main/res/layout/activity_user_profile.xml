@@ -61,6 +61,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
+                android:id="@+id/buttonLinear"
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,23 +73,11 @@
                     android:id="@+id/buddy_up_button"
                     android:layout_marginEnd="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_width="150dp"
+                    android:layout_width="310dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/buddy_up_button"
                     android:text="Buddy UP!"
                     android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/follow_button"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/follow_btn"
-                    android:text="Follow"
-                    android:textColor="@color/white"
-                    tools:layout_editor_absoluteX="200dp"
-                    tools:layout_editor_absoluteY="0dp" />
 
             </LinearLayout>
 
@@ -126,17 +115,18 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Henry, 27"
+                android:text="Henry"
                 android:gravity="center"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_margin="10dp"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="So Who am I?"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:text="about me"
                 android:background="#EB5757"
                 android:padding="5dp"
                 android:layout_margin="10dp"
@@ -152,27 +142,6 @@
                 android:padding="5dp"
                 android:background="#eaeaea"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod elementum commodo. In interdum sollicitudin libero, eu tincidunt ex laoreet eu. Donec faucibus, odio sed feugiat." />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="So Who am I?"
-                android:background="#EB5757"
-                android:padding="5dp"
-                android:layout_margin="10dp"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                android:textAllCaps="true"
-                android:textSize="16sp" />
-            <TextView
-                android:id="@+id/user_bio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-                android:background="#eaeaea"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod elementum commodo. In interdum sollicitudin libero, eu tincidunt ex laoreet eu. Donec faucibus, odio sed feugiat." />
-
-
         </LinearLayout>
         <ProgressBar
             android:id="@+id/progressBar"
@@ -182,7 +151,6 @@
             android:background="#99000000"
             android:visibility="gone"
             />
-
     </FrameLayout>
 
 </ScrollView>

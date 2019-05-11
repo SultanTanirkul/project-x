@@ -14,7 +14,7 @@ public class Event {
     private String activity = null;
     private int[] location  = new int[2];
     private int playerLimit  = -1;
-    private int playerNumber = -1;
+    private int playerNumberMin = -1;
     private String date      = null;
     private String description = null;
     private ArrayList<String> participants = null;
