@@ -52,6 +52,7 @@
         android:id="@+id/explore_profile_picture"
         android:layout_width="125dp"
         android:layout_height="125dp"
+        android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="@id/explore_profile_pic_border"
         app:layout_constraintEnd_toEndOf="@id/explore_profile_pic_border"
         app:layout_constraintLeft_toLeftOf="@id/explore_profile_pic_border"
