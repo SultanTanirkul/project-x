@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         m_RegistrationLink = findViewById(R.id.link_register);
         m_ForgetPassLink = findViewById(R.id.link_forget_pass);
 
+        dialog = ProgressDialog.show(MainActivity.this, "",
+                "Loading. Please wait...", true);
+        dialog.hide();
 
 
         // Handle previously logged in user
@@ -55,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // Some functionality for Login Button
         m_Login_Button.setOnClickListener((View v) -> {
             Log.i("---->", "Login button pressed");
-            dialog = ProgressDialog.show(MainActivity.this, "",
-                    "Loading. Please wait...", true);
+
 
             Map<String, String> userLoginParams = new HashMap<>();
             userLoginParams.put("username", m_Username_EditText.getText().toString());
