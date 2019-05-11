@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.HashMap;
 import java.util.Map;
 
 class ServerOp {
@@ -26,17 +27,29 @@ class ServerOp {
         void respond(String response);
     }
 
-    public StringRequest getRequest(String url, Predicate<String> responder) {
+    public StringRequest getRequest(String url, Map params, Predicate<String> responder){
         final StringRequest getRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) { responder.respond(response); }
+                    public void onResponse(String response) {
+                        responder.respond(response);
+                    }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 responder.respond(error.toString());
             }
-        });
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return super.getHeaders();
+            }
+        };
         return getRequest;
     }
 
@@ -57,9 +70,13 @@ class ServerOp {
             protected Map<String, String> getParams() throws AuthFailureError {
                 return params;
             }
+
+
         };
         return postRequest;
     }
+
+
 
     public static synchronized ServerOp getInstance(Context context) {
         if(serverOp == null){
