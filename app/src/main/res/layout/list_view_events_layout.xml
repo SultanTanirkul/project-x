@@ -57,6 +57,7 @@
         android:id="@+id/location_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player_count_label"
         android:text="@string/event_location"
         android:textColor="#FFF"
