@@ -1,7 +1,9 @@
 package com.project.group18.limberup;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -27,8 +29,15 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.UUID;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -37,8 +46,12 @@ public class UserProfileActivity extends AppCompatActivity {
     private Button m_FollowButton            = null;
     private Button m_MessageButton           = null;
     private ImageView m_ProfilePictureBorder = null;
-    private ImageView m_ProfilePicture       = null;
+    private CircleImageView m_ProfilePicture       = null;
+    private TextView m_bio = null;
+    private TextView m_username = null;
     private Uri filePath                     = null;
+    private User currentUser;
+    private String imageUrl;
 
     private static final int PICK_IMAGE_REQUEST = 71;
 
@@ -53,17 +66,31 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_user_profile);
+
+        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", null);
+        HashMap params = new HashMap<>();
+        params.put("token", token);
+        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/activity/read", params, (s) ->{
+            try {
+               setUser(new JSONObject(s));
+            } catch(JSONException e){
+                Log.i("---->", "setActivities: " + e.toString());
+            }
+        }));
         storageReference = FirebaseStorage.getInstance().getReference();
         //Initialization of Activity elements
-        m_FollowButton = findViewById(R.id.follow_button);
         m_BuddyUpButton = findViewById(R.id.buddy_up_button);
-        m_MessageButton = findViewById(R.id.follow_button);
+        m_MessageButton = findViewById(R.id.message_button);
         m_FollowerCount = findViewById(R.id.follower_count);
         m_BuddyCount = findViewById(R.id.buddy_count);
         m_ProfilePictureBorder = findViewById(R.id.profile_pic_border);
         m_ProfilePicture = findViewById(R.id.profile_picture);
+        m_username = findViewById(R.id.name);
+        m_bio = findViewById(R.id.user_bio);
+
 
         m_ProfilePictureBorder.setOnClickListener((View v) -> {
             chooseImage();
@@ -114,6 +141,13 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
+    public void setUser(JSONObject userJson) throws JSONException{
+        currentUser = new User(userJson);
+        m_username.setText(currentUser.getUsername());
+        m_bio.setText(currentUser.getBio());
+        currentUser.setImage(m_ProfilePicture);
+    }
+
     private void uploadImage() {
 
         if(filePath != null)
@@ -159,7 +193,10 @@ public class UserProfileActivity extends AppCompatActivity {
                                                 Toast.makeText(UserProfileActivity.this, "Error: Could not download an image.", Toast.LENGTH_SHORT);
                                             }
                                         });
-                                        Log.v("Firebase", downloadUri.toString());
+
+                                        imageUrl = downloadUri.toString();
+                                        Log.v("Firebase", imageUrl);
+
                                     } else {
                                         // Handle failures
                                         // ...
@@ -184,11 +221,7 @@ public class UserProfileActivity extends AppCompatActivity {
                             progressDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
                     });
-
-
-
         }
-
 
     }
 }
