@@ -38,24 +38,7 @@ public class Dashboard extends AppCompatActivity {
 
         // Some functionality for Log out button.
         m_LogOut_Button.setOnClickListener((View v) -> {
-
-
-            String token = sharedPref.getString("token", null);
-            Log.i("---->", "Token: " + token);
-
-            sharedPref.edit().remove("username").commit();
-            sharedPref.edit().remove("password").commit();
-            sharedPref.edit().remove("token").commit();
-            sharedPref.edit().clear();
-            sharedPref.edit().commit();
-            token = sharedPref.getString("token", null);
-            String username = sharedPref.getString("username", null);
-            String password = sharedPref.getString("password", null);
-
-            Log.i("---->", "Token: " + token);
-            Log.i("---->", "Username: " + username);
-            Log.i("---->", "Password: " + password);
-
+            sharedPref.edit().clear().commit();
             Intent intent = new Intent(Dashboard.this, MainActivity.class);
             startActivity(intent);
             finish();

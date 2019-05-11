@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Some functionality for Login Button
         m_Login_Button.setOnClickListener((View v) -> {
+            Log.i("---->", "Login button pressed");
             dialog = ProgressDialog.show(MainActivity.this, "",
                     "Loading. Please wait...", true);
 
@@ -69,8 +70,10 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("username", m_Username_EditText.getText().toString());
             editor.putString("password", (m_Password_EditText.getText().toString()));
             editor.apply();
+
             ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
             serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/authenticate", userLoginParams, (s) -> {
+                Log.i("---->", "Response: " + s);
                 dialog.hide();
                 login(s);
             }));
@@ -97,12 +100,13 @@ public class MainActivity extends AppCompatActivity {
         String password = sharedPref.getString("password", null);
         String token = sharedPref.getString("token", null);
         if (token != null) {
-
+            Log.i("---->", "Token exists");
             ServerOp checkTokenReq = ServerOp.getInstance(getApplicationContext());
             Map<String, String> authPrams = new HashMap<>();
             authPrams.put("token", token);
             checkTokenReq.addToRequestQueue(checkTokenReq.postRequest("https://limberup.herokuapp.com/api/verify", authPrams, (s) -> checkToken(s)));
             if (password != null && username != null) {
+                Log.i("---->", "Checking stored login");
                 Map<String, String> userLoginParams = new HashMap<>();
                 userLoginParams.put("username", username);
                 userLoginParams.put("password", password);
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/authenticate", userLoginParams, (s) -> login(s)));
             }
         }
-
+        Log.i("---->", "User not auto logged in");
         return false;
 
     }
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         if (s =="1"){
             loggedIn();
         }
+        Log.i("---->", "Token not authenticated");
     }
 
     /**
@@ -165,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Signed Out successfully", Toast.LENGTH_LONG).show();
         return true;
     }
+
+
 
 
 }
