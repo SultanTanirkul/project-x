@@ -24,7 +24,7 @@
 
         <activity android:name=".EventCreateActivity" />
         <activity android:name=".EventListActivity" />
-        <activity android:name=".Dashboard" />
+        <activity android:name=".DashboardActivity" />
         <activity android:name=".ActivityCategory" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -41,11 +41,9 @@
             android:name=".UserProfileActivity"
             android:label="Profile" />
         <activity
-            android:name=".RegistrationActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+            android:name=".RegistrationActivity"></activity>
         <activity
-            android:name=".MainActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

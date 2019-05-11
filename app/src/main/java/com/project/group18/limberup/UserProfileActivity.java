@@ -40,6 +40,8 @@ public class UserProfileActivity extends AppCompatActivity {
     private ImageView m_ProfilePicture       = null;
     private Uri filePath                     = null;
 
+    private String imageUrl;
+
     private static final int PICK_IMAGE_REQUEST = 71;
 
     Bitmap bitmap;
@@ -159,7 +161,10 @@ public class UserProfileActivity extends AppCompatActivity {
                                                 Toast.makeText(UserProfileActivity.this, "Error: Could not download an image.", Toast.LENGTH_SHORT);
                                             }
                                         });
-                                        Log.v("Firebase", downloadUri.toString());
+
+                                        imageUrl = downloadUri.toString();
+                                        Log.v("Firebase", imageUrl);
+
                                     } else {
                                         // Handle failures
                                         // ...

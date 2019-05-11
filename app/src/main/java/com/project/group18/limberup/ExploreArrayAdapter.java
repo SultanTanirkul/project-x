@@ -39,11 +39,11 @@ public class ExploreArrayAdapter extends ArrayAdapter<User>{
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_view_explore_layout, null);
 
-        ImageView profilePic = view.findViewById(R.id.explore_profile_picture);
+        CircleImageView profilePic = view.findViewById(R.id.explore_profile_picture);
         TextView userName_Age = view.findViewById(R.id.explore_user_name_age);
         TextView userInterests = view.findViewById(R.id.explore_user_interests);
 
-        Picasso.get().load("https://cdn.igromania.ru/mnt/articles/9/8/4/5/9/7/27170/html/img/59ab0985c3701a36.jpg").fit().into(profilePic, new Callback() {
+        Picasso.get().load("https://cdn.igromania.ru/mnt/articles/9/8/4/5/9/7/27170/html/img/59ab0985c3701a36.jpg").into(profilePic, new Callback() {
             @Override public void onSuccess() {
                 Toast.makeText(getContext(), "Images are downloaded.", Toast.LENGTH_LONG).show();
             }

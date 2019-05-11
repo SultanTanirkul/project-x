@@ -24,12 +24,17 @@ public class ExploreActivity extends AppCompatActivity {
         users.add(user);
         users.add(user);
         users.add(user);
+        users.add(user);
+        users.add(user);
+        users.add(user);
 
         ArrayAdapter<User> adapter =  new ExploreArrayAdapter(this, 0, users);
 
         ListView exploreListView = findViewById(R.id.explore_list_view);
 
         exploreListView.setAdapter(adapter);
+
+        //exploreListView.setOnItemClickListener(new);
 
     }
 }

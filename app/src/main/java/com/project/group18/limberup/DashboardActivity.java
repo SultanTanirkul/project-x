@@ -5,14 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
-public class Dashboard extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
 
     private Button m_LogOut_Button      = null;
     private Button m_Event_Invitations_Button      = null;
@@ -27,7 +23,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        SharedPreferences sharedPref = Dashboard.this.getSharedPreferences(
+        SharedPreferences sharedPref = DashboardActivity.this.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         // Initialization of View Elements.
@@ -39,23 +35,23 @@ public class Dashboard extends AppCompatActivity {
         // Some functionality for Log out button.
         m_LogOut_Button.setOnClickListener((View v) -> {
             sharedPref.edit().clear().commit();
-            Intent intent = new Intent(Dashboard.this, MainActivity.class);
+            Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
         m_Event_Invitations_Button.setOnClickListener((View v) -> {
-            Intent intent = new Intent(Dashboard.this, UserProfileActivity.class);
+            Intent intent = new Intent(DashboardActivity.this, UserProfileActivity.class);
             startActivity(intent);
         });
 
         m_Event_Recommendations_Button.setOnClickListener((View v) ->{
-            Intent intent = new Intent(Dashboard.this, ActivityCategory.class);
+            Intent intent = new Intent(DashboardActivity.this, ActivityCategory.class);
             startActivity(intent);
         });
 
         m_Dashboard_Explore_Button.setOnClickListener((View v) ->{
-            Intent intent = new Intent (Dashboard.this, ExploreActivity.class);
+            Intent intent = new Intent (DashboardActivity.this, ExploreActivity.class);
             startActivity(intent);
         });
     }

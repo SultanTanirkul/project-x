@@ -4,18 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -153,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
      * Move to the dashboard layout
      */
     private void loggedIn() {
-        Intent intent = new Intent(MainActivity.this, Dashboard.class);
+        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
         startActivity(intent);
         finish();
     }

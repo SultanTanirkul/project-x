@@ -1,111 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@color/colorBackgroundLogin"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".RegistrationActivity">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:srcCompat="@drawable/logo" />
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
 
-        <EditText
-            android:id="@+id/username_params"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/text_input_bg_login"
-            android:ems="10"
-            android:hint="@string/register_username"
-            android:inputType="textPersonName"
-            android:padding="10dp" />
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".RegistrationActivity">
 
-        <EditText
-            android:id="@+id/password_params"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/text_input_bg_login"
-            android:ems="10"
-            android:hint="@string/register_password"
-            android:inputType="textPassword"
-            android:padding="10dp" />
-
-        <EditText
-            android:id="@+id/email_params"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/text_input_bg_login"
-            android:ems="10"
-            android:hint="@string/register_email"
-            android:inputType="textEmailAddress"
-            android:padding="10dp" />
-
-        <EditText
-            android:id="@+id/interests_params"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/text_input_bg_login"
-            android:ems="10"
-            android:hint="@string/register_interests"
-            android:inputType="textPersonName"
-            android:padding="10dp" />
-
-        <EditText
-            android:id="@+id/bio_params"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/text_input_bg_login"
-            android:ems="10"
-            android:hint="@string/register_bio"
-            android:inputType="textMultiLine"
-            android:padding="10dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <Button
-            android:id="@+id/back_button"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="7dp"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/button_bg_back"
-            android:text="@string/register_back_button" />
+            app:srcCompat="@drawable/logo" />
 
-        <Button
-            android:id="@+id/registration_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/button_bg_login"
-            android:text="@string/register_sign_up_button" />
+            android:layout_margin="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/username_params"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_input_bg_login"
+                android:ems="10"
+                android:hint="@string/register_username"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/password_params"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_input_bg_login"
+                android:ems="10"
+                android:hint="@string/register_password"
+                android:inputType="textPassword"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/email_params"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_input_bg_login"
+                android:ems="10"
+                android:hint="@string/register_email"
+                android:inputType="textEmailAddress"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/interests_params"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_input_bg_login"
+                android:ems="10"
+                android:hint="@string/register_interests"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/bio_params"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_input_bg_login"
+                android:ems="10"
+                android:hint="@string/register_bio"
+                android:inputType="textMultiLine"
+                android:padding="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/signup_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="7dp"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/button_bg_back"
+                android:text="@string/register_back_button" />
+
+            <Button
+                android:id="@+id/registration_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
+                android:background="@drawable/button_bg_login"
+                android:text="@string/register_sign_up_button" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>
