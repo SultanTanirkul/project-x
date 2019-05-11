@@ -55,6 +55,14 @@
             android:text="Event Recommendations"
             />
 
+
+        <Button
+            android:id="@+id/dashboard_explore_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explore"
+            />
+
     </LinearLayout>
 
 </LinearLayout>

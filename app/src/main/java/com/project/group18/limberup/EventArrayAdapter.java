@@ -19,7 +19,6 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
     EventArrayAdapter(Context context, int resource, ArrayList<Event> objects)
     {
         super(context, resource, objects);
-
         this.context = context;
         this.events = objects;
     }
@@ -28,7 +27,6 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
     public View getView(int position, View convertView, ViewGroup parent)
     {
         Event event = events.get(position);
-
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_view_events_layout, null);
@@ -39,10 +37,9 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         TextView playerLimit =  view.findViewById(R.id.event_player_limit);
         TextView date =  view.findViewById(R.id.event_date);
 
-
         title.setText(event.getTitle());
         playerLimit.setText(String.valueOf(event.getPlayerLimit()));
-        playerNumber.setText(String.valueOf(event.getPlayerNumber()));
+        playerNumber.setText(String.valueOf(event.getPlayerNumberMin()));
         location.setText(event.getLocation());
         date.setText(event.getDate());
 

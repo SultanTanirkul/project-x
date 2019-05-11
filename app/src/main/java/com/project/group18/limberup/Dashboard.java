@@ -16,6 +16,7 @@ public class Dashboard extends AppCompatActivity {
     private Button m_LogOut_Button      = null;
     private Button m_Event_Invitations_Button      = null;
     private Button m_Event_Recommendations_Button      = null;
+    private Button m_Dashboard_Explore_Button = null;
 
     public static final String EXTRA_MESSAGE = "com.project.group18.limberup.MESSAGE";
 
@@ -29,6 +30,7 @@ public class Dashboard extends AppCompatActivity {
         m_LogOut_Button = findViewById(R.id.sign_out_button);
         m_Event_Invitations_Button = findViewById(R.id.event_invitations);
         m_Event_Recommendations_Button = findViewById(R.id.event_recommendations);
+        m_Dashboard_Explore_Button = findViewById(R.id.dashboard_explore_button);
 
         // Some functionality for Log out button.
         m_LogOut_Button.setOnClickListener((View v) -> {
@@ -45,6 +47,11 @@ public class Dashboard extends AppCompatActivity {
 
         m_Event_Recommendations_Button.setOnClickListener((View v) ->{
             Intent intent = new Intent(Dashboard.this, ActivityCategory.class);
+            startActivity(intent);
+        });
+
+        m_Dashboard_Explore_Button.setOnClickListener((View v) ->{
+            Intent intent = new Intent (Dashboard.this, ExploreActivity.class);
             startActivity(intent);
         });
     }

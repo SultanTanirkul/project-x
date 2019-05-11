@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loggedIn();
 
         // Initialization of View Elements.
         m_Login_Button = findViewById(R.id.login_button);

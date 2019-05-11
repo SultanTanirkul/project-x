@@ -8,7 +8,7 @@
     android:padding="5dp">
 
     <ImageView
-        android:id="@+id/profile_pic_border"
+        android:id="@+id/explore_profile_pic_border"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_marginStart="8dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/user_name_age"
+        android:id="@+id/explore_user_name_age"
         android:text="Lauren, 24"
         android:textSize="25sp"
         android:layout_marginTop="20dp"
@@ -30,32 +30,32 @@
         android:layout_marginRight="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/profile_pic_border"
-        app:layout_constraintTop_toTopOf="@id/profile_pic_border" />
+        app:layout_constraintLeft_toRightOf="@id/explore_profile_pic_border"
+        app:layout_constraintTop_toTopOf="@id/explore_profile_pic_border" />
 
     <TextView
-        android:id="@+id/user_interests"
+        android:id="@+id/explore_user_interests"
         android:text="Basketball, Cricket, Yoga, Baseball, Football"
         android:textSize="20sp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
 
-        app:layout_constraintLeft_toLeftOf="@id/user_name_age"
+        app:layout_constraintLeft_toLeftOf="@id/explore_user_name_age"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_name_age"
+        app:layout_constraintTop_toBottomOf="@id/explore_user_name_age"
         android:maxLines="2"
         android:ellipsize="end"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_picture"
+        android:id="@+id/explore_profile_picture"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        app:layout_constraintBottom_toBottomOf="@id/profile_pic_border"
-        app:layout_constraintEnd_toEndOf="@id/profile_pic_border"
-        app:layout_constraintLeft_toLeftOf="@id/profile_pic_border"
-        app:layout_constraintStart_toStartOf="@id/profile_pic_border"
-        app:layout_constraintTop_toTopOf="@id/profile_pic_border" />
+        app:layout_constraintBottom_toBottomOf="@id/explore_profile_pic_border"
+        app:layout_constraintEnd_toEndOf="@id/explore_profile_pic_border"
+        app:layout_constraintLeft_toLeftOf="@id/explore_profile_pic_border"
+        app:layout_constraintStart_toStartOf="@id/explore_profile_pic_border"
+        app:layout_constraintTop_toTopOf="@id/explore_profile_pic_border" />
 
 
 </android.support.constraint.ConstraintLayout>

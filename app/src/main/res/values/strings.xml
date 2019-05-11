@@ -52,7 +52,7 @@
     <string name="event_create_category">Category</string>
     <string name="event_create_date">Date</string>
     <string name="event_create_time">Time</string>
-    
+
     <string name="event_create_create_button">Create</string>
     <string name="event_create_back_button">Back</string>
 
