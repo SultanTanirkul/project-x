@@ -9,17 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.support.v7.widget.GridLayout;
-import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.android.volley.Request;
-import com.project.group18.limberup.Activity;
 
 public class ActivityCategory extends AppCompatActivity {
     private ArrayList<Activity> activities = new ArrayList<>();
@@ -86,6 +82,7 @@ public class ActivityCategory extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
                     intent.putExtra("id", currentActivity.id);
+                    intent.putExtra("activity", currentActivity.name);
                     startActivity(intent);
                 }
             });
