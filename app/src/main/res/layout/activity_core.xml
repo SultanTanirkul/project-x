@@ -3,19 +3,42 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment android:id="@+id/autocomplete_fragment"
+
+    <fragment
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapActivity" />
+
+    <!--<ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_done_black_48dp"
+        android:background="@drawable/done_background_button"
+        android:layout_gravity="center|bottom"
+        android:layout_margin="100dp"
+        android:id="@+id/map_activity_done_button"/>-->
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-        />
+        android:layout_margin="10dp">
+        <fragment android:id="@+id/autocomplete_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
 
-<fragment
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MapActivity" />
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
+
+    </android.support.v7.widget.CardView>
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        layout="@layout/map_activity_place_info_layout" />
+
 </FrameLayout>

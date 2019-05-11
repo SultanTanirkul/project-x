@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/place_information"
+    android:visibility="gone"
+    android:orientation="vertical"
+    android:background="@drawable/place_information_bg"
+    android:padding="10dp"
+    android:elevation="10dp">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:background="@drawable/place_information_image_bg"
+        android:src="@drawable/ic_photo_white_64dp"
+        android:id="@+id/place_information_image"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/place_information_address"
+        android:text="Stag Hill, Guildford GU2 7XH"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_margin="5dp"
+        android:textColor="#000"
+        android:textStyle="bold"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:id="@+id/place_information_confirm_button"
+        android:layout_gravity="center|top"
+        android:background="@drawable/create_activity_button"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:text="Show on the map"
+        android:id="@+id/place_information_show_on_map_button"
+        android:layout_gravity="center|top"
+        android:background="@drawable/message_btn"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/place_information_cancel_button"
+        android:layout_gravity="center|top"
+        android:background="@drawable/follow_btn"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

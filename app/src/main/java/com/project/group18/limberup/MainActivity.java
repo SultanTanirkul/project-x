@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         m_RegistrationLink = findViewById(R.id.link_register);
         m_ForgetPassLink = findViewById(R.id.link_forget_pass);
 
-
         // Handle logged in user and signout
         if (getIntent() != null) {
             Intent intent = getIntent();
