@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Handle previously logged in user
         if (checkIfLogged()) {
+            Log.i("---->", "Checking if stored user exists!");
             loggedIn();
         }
 
@@ -101,12 +102,22 @@ public class MainActivity extends AppCompatActivity {
             ServerOp checkTokenReq = ServerOp.getInstance(getApplicationContext());
             Map<String, String> authPrams = new HashMap<>();
             authPrams.put("token", token);
-            checkTokenReq.addToRequestQueue(checkTokenReq.postRequest("https://limberup.herokuapp.com/api/verify", authPrams, (s) -> checkToken(s)));
+            checkTokenReq.addToRequestQueue(checkTokenReq.postRequest("https://limberup.herokuapp.com/api/verify", authPrams, (s) -> {
+                if (Integer.parseInt(s) == 200){
+                    Log.i("---->", "Token authenticated: " + s);
+                    loggedIn();
+                }
+                else{
+                    Log.i("---->", "Token not authenticated: " + s);
+                }
+            }));
+            Log.i("---->", "Checking stored login");
             if (password != null && username != null) {
                 Log.i("---->", "Checking stored login");
                 Map<String, String> userLoginParams = new HashMap<>();
                 userLoginParams.put("username", username);
                 userLoginParams.put("password", password);
+                Log.i("---->", "User: " + username + " Pass: " +password);
                 ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
                 serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/authenticate", userLoginParams, (s) -> login(s)));
             }
@@ -117,10 +128,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkToken(String s){
-        if (s =="1"){
+        Log.i("---->",  s);
+        if (Integer.parseInt(s) == 200){
+            Log.i("---->", "Token authenticated: " + s);
             loggedIn();
         }
-        Log.i("---->", "Token not authenticated");
+        else{
+            Log.i("---->", "Token not authenticated: " + s);
+        }
+
+
     }
 
     /**
