@@ -1,4 +1,4 @@
-/*package com.project.group18.limberup;
+package com.project.group18.limberup;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -51,4 +51,4 @@ public class EventListActivity extends AppCompatActivity {
 
         eventListView.setAdapter(adapter);
     }
-}*/
+}

@@ -27,7 +27,6 @@ public class Event {
         this.activity = activity;
         this.location = location;
         this.playerLimit = playerLimit;
-        this.playerNumberMin = playerNumberMin;
         this.date = date;
         this.id = id;
         this.participants = new ArrayList<>();
@@ -58,6 +57,5 @@ public class Event {
     public String getActivity(){ return this.activity;}
     public int[] getLocation(){ return this.location;}
     public int getPlayerLimit(){ return this.playerLimit;}
-    public int getPlayerNumberMin(){ return this.playerNumberMin;}
     public String getDate(){return this.date;}
 }
