@@ -23,13 +23,13 @@ public class EventListActivity extends AppCompatActivity {
         serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/activity/read", params, (s) ->{
             try {
                 JSONArray response = new JSONArray(s);
-                setActivities(response);
-                setupActivityGrid();
+                //setActivities(response);
+                //setupActivityGrid();
             } catch(JSONException e){
                 Log.i("---->", "setActivities: " + e.toString());
             }
         }));
-        Event tempEvent = new Event("1","Louis's 5-Side", "Louis", EventCategoryEnum.FOOTBALL, "Surrey Sports Park, Richard Meyjes, Rd Guildford, GU2 7AD", 10, 16, "10:30", null);
+        /*Event tempEvent = new Event("1","Louis's 5-Side", "Louis", EventCategoryEnum.FOOTBALL, "Surrey Sports Park, Richard Meyjes, Rd Guildford, GU2 7AD", 10, 16, "10:30", null);
 
         events.add(tempEvent);
         events.add(tempEvent);
@@ -37,8 +37,7 @@ public class EventListActivity extends AppCompatActivity {
         events.add(tempEvent);
         events.add(tempEvent);
         events.add(tempEvent);
-
-
+        */
         ArrayAdapter<Event> adapter =  new EventArrayAdapter(this, 0, events);
 
         ListView eventListView = findViewById(R.id.events_event_list);
