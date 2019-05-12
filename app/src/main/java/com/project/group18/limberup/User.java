@@ -43,8 +43,12 @@ public class User {
         this.bio = userJson.getString("bio");
         this.interests = new ArrayList<>();
         JSONArray interestsJson = userJson.getJSONArray("interests");
-        for(int i = 0; i < interests.size(); i++){
+        for(int i = 0; i < interestsJson.length(); i++){
             interests.add(interestsJson.getJSONObject(i).getString("id"));
+        }
+        JSONArray friendsJson = userJson.getJSONArray("friends");
+        for(int i = 0; i < friendsJson.length(); i++){
+            friends.add(new Friend(friendsJson.getJSONObject(i)));
         }
         this.image = userJson.getString("profileImgUrl");
         } catch(JSONException e){
