@@ -2,6 +2,7 @@ package com.project.group18.limberup;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -64,6 +65,7 @@ class ServerOp {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.i("---->", "onErrorResponse: " + error.toString());
                 responder.respond(error.toString());
             }
         }) {

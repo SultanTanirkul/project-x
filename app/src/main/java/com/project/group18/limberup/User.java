@@ -9,10 +9,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class User {
+    private String id = null;
     private String username  = null;
     private String password  = null;
     private ArrayList<String> interests = null;
@@ -33,7 +35,8 @@ public class User {
     }
 
     public User(JSONObject userJson) throws JSONException {
-        this.username = userJson.getString("name");
+        this.id = userJson.getString("_id");
+        this.username = userJson.getString("username");
         this.email = userJson.getString("email");
         this.bio = userJson.getString("bio");
         this.interests = new ArrayList<>();
@@ -41,7 +44,22 @@ public class User {
         for(int i = 0; i < interests.size(); i++){
             interests.add(interestsJson.getJSONObject(i).getString("id"));
         }
-        this.image = userJson.getString("profileImgUrl");
+        try {
+            this.image = userJson.getString("profileImgUrl");
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    public HashMap toJson(){
+            HashMap userJson = new HashMap();
+            userJson.put("id", this.id);
+            userJson.put("username", this.getUsername());
+            userJson.put("email", this.getEmail());
+            userJson.put("bio", this.getBio());
+            //userJson.put("interests", this.interests);
+            userJson.put("profileImgUrl", this.getImage());
+            return userJson;
     }
 
     public String getUsername() {
@@ -67,7 +85,11 @@ public class User {
 
     public int getAge(){return age;}
 
-    public void setImage(CircleImageView profilepic){
+    public void setImageView(CircleImageView profilepic){
         Picasso.get().load(this.getImage()).into(profilepic);
+    }
+
+    public void setImage(String imageUrl){
+        this.image = imageUrl;
     }
 }

@@ -27,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -43,7 +44,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     // Declaration of Button type Elements
     private Button m_BuddyUpButton           = null;
-    private Button m_FollowButton            = null;
     private Button m_MessageButton           = null;
     private ImageView m_ProfilePictureBorder = null;
     private CircleImageView m_ProfilePicture       = null;
@@ -51,8 +51,6 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView m_username = null;
     private Uri filePath                     = null;
     private User currentUser;
-    private String imageUrl;
-
     private String imageUrl;
 
     private static final int PICK_IMAGE_REQUEST = 71;
@@ -74,8 +72,9 @@ public class UserProfileActivity extends AppCompatActivity {
         String token = sharedPref.getString("token", null);
         HashMap params = new HashMap<>();
         params.put("token", token);
+        Log.i("---->", "setActivities: " + token);
         ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/activity/read", params, (s) ->{
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/read", params, (s) ->{
             try {
                setUser(new JSONObject(s));
             } catch(JSONException e){
@@ -96,16 +95,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
         m_ProfilePictureBorder.setOnClickListener((View v) -> {
             chooseImage();
-        });
-
-
-
-        //Follow Button's functionality to increase the follower count if clicked
-        m_FollowButton.setOnClickListener((View v) -> {
-            int folCount = Integer.parseInt(m_FollowerCount.getText().toString());
-
-            folCount++;
-            m_FollowerCount.setText(String.valueOf(folCount));
         });
 
         //Buddy Up Button's functionality to increase the buddy count if clicked
@@ -144,10 +133,11 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void setUser(JSONObject userJson) throws JSONException{
+        Log.i("---->", "setUser: " + userJson);
         currentUser = new User(userJson);
         m_username.setText(currentUser.getUsername());
         m_bio.setText(currentUser.getBio());
-        currentUser.setImage(m_ProfilePicture);
+        currentUser.setImageView(m_ProfilePicture);
     }
 
     private void uploadImage() {
@@ -181,8 +171,18 @@ public class UserProfileActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         Uri downloadUri = task.getResult();
+                                        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                                        String token = sharedPref.getString("token", null);
+                                        currentUser.setImage(downloadUri.toString());
+                                        HashMap<String, String> params = currentUser.toJson();
+                                        params.put("token", token);
+                                        Log.i("--->", "onComplete: updating");
+                                        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+                                        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) ->{
+                                            Log.i("--->", "onComplete: " + s);
+                                        }));
                                         progressBar.setVisibility(View.VISIBLE);
-                                        Picasso.get().load(downloadUri).into(m_ProfilePicture, new com.squareup.picasso.Callback() {
+                                        Picasso.get().load(downloadUri).into(m_ProfilePicture, new Callback() {
                                             @Override
                                             public void onSuccess() {
                                                 if (progressBar != null) {
@@ -224,6 +224,7 @@ public class UserProfileActivity extends AppCompatActivity {
                         }
                     });
         }
-
     }
+
+
 }

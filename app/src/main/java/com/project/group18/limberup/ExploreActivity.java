@@ -17,7 +17,7 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
-        User user = new User("Dummy User", "Dummy Password", "DummyUser@dummymail.my", "I'm Dummy User", "Being Dummyjkbvkb bdshg bkajsdbg absdjk gbaskdlj gbaskf glafdskj ghnlkahjfl nghjandf lganshf gakhjs gfnlahjk",
+        User user = new User("Dummy User", "Dummy Password", "DummyUser@dummymail.my", "I'm Dummy User", new ArrayList<>(),
                 "https://cdn.igromania.ru/mnt/articles/9/8/4/5/9/7/27170/html/img/59ab0985c3701a36.jpg", 12);
 
         users.add(user);

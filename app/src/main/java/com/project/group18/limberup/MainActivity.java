@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
             startActivity(intent);
         });
-        
+
     }
 
     /**
@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             Log.i("---->", "Token not authenticated: " + s);
         }
-
 
     }
 
