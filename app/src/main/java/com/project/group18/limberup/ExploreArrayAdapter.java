@@ -2,6 +2,7 @@ package com.project.group18.limberup;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,10 +26,10 @@ public class ExploreArrayAdapter extends ArrayAdapter<User>{
     private Context context = null;
     private List<User> users = null;
 
-    public ExploreArrayAdapter(Context context, int resource, ArrayList<User> objects){
-        super(context, resource, objects);
+    public ExploreArrayAdapter(Context context, int resource, ArrayList<User> users){
+        super(context, resource, users);
         this.context = context;
-        this.users = objects;
+        this.users = users;
         Log.v("Client", users.get(1).getUsername());
     }
 
@@ -43,22 +44,19 @@ public class ExploreArrayAdapter extends ArrayAdapter<User>{
         TextView userName_Age = view.findViewById(R.id.explore_user_name_age);
         TextView userInterests = view.findViewById(R.id.explore_user_interests);
 
-        Picasso.get().load("https://cdn.igromania.ru/mnt/articles/9/8/4/5/9/7/27170/html/img/59ab0985c3701a36.jpg").into(profilePic, new Callback() {
-            @Override public void onSuccess() {
-                Toast.makeText(getContext(), "Images are downloaded.", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(Exception e) {
-                Toast.makeText(getContext(), "Images are not downloaded.", Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
-        Toast.makeText(getContext(), "Images are downloaded.", Toast.LENGTH_LONG).show();
-
+        user.setImageView(profilePic);
         userName_Age.setText(user.getUsername() + ", "+ user.getAge());
-        userInterests.setText(user.getInterests().toString());
+        //userInterests.setText(user.getInterests());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("---->", "onClick: created on click listener");
+                Intent intent = new Intent(context, UserProfileActivity.class);
+                intent.putExtra("id", user.getId());
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 }
