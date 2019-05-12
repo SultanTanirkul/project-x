@@ -25,6 +25,7 @@
 
         <activity android:name=".EventListActivity" />
         <activity android:name=".DashboardActivity" />
+        <activity android:name=".WebViewActivity" />
         <activity android:name=".ActivityCategory" />
         <activity android:name=".EventCreateActivity" />
         <!--

@@ -97,15 +97,6 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
 
-
-        //Follow Button's functionality to increase the follower count if clicked
-        m_FollowButton.setOnClickListener((View v) -> {
-            int folCount = Integer.parseInt(m_FollowerCount.getText().toString());
-
-            folCount++;
-            m_FollowerCount.setText(String.valueOf(folCount));
-        });
-
         //Buddy Up Button's functionality to increase the buddy count if clicked
         m_BuddyUpButton.setOnClickListener((View v) -> {
             int buddyCount = Integer.parseInt((m_BuddyCount.getText().toString()));
