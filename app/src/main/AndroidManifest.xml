@@ -28,7 +28,9 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".EventListActivity" />
-        <activity android:name=".DashboardActivity" />
+        <!--<activity android:name=".DashboardActivity" />-->
+        <activity android:name=".UserProfileEditActivity" />
+        <activity android:name=".UserProfileOfflineEditActivity" />
         <activity android:name=".TestingActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".ActivityCategory" />

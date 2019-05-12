@@ -60,6 +60,19 @@
 
             </android.support.constraint.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile:"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"/>
+
             <LinearLayout
                 android:id="@+id/buttonLinear"
                 android:gravity="center_horizontal"
@@ -69,69 +82,33 @@
                 android:orientation="horizontal"
                 android:paddingTop="15dp">
 
-                <Button
-                    android:id="@+id/buddy_up_button"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="310dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/buddy_up_button"
-                    android:text="Add Friend"
-                    android:textColor="@color/white" />
 
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/message_button"
-                android:layout_width="310dp"
-                android:layout_margin="10dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/message_btn"
-                android:text="Message" />
-
-            <Button
-                android:id="@+id/edit_button"
-                android:layout_width="310dp"
-                android:layout_margin="10dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/message_btn"
-                android:text="Edit" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/buddy_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" | " />
-
-                <TextView
-                    android:id="@+id/follower_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="500" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Henry"
-                android:gravity="center"
+                android:text="Name:"
+                android:gravity="left"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_margin="10dp"/>
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/name_param"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="no"
+                android:background="@drawable/text_input_bg_login"
+                android:ems="10"
+                android:inputType="text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
             <TextView
                 android:id="@+id/redbar1"
                 android:layout_width="match_parent"
@@ -145,24 +122,62 @@
                 android:textAllCaps="true"
                 android:textSize="16sp" />
             <TextView
-                android:id="@+id/user_bio"
+                android:id="@+id/bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textAlignment="center"
-                android:layout_marginRight="20dp"
+                android:text="Bio:"
+                android:gravity="left"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/bio_param"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_input_bg_login"
+                android:ems="10"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/redbar2"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:text="about me"
+                android:background="#EB5757"
                 android:padding="5dp"
-                android:background="#eaeaea"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod elementum commodo. In interdum sollicitudin libero, eu tincidunt ex laoreet eu. Donec faucibus, odio sed feugiat." />
+                android:layout_margin="10dp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/update_button"
+                android:layout_width="310dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/buddy_up_button"
+                android:text="Update Profile"
+                android:textColor="@color/white" />
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="310dp"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/message_btn"
+                android:text="Cancel Changes" />
+
         </LinearLayout>
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#99000000"
-            android:visibility="gone"
-            />
+
     </FrameLayout>
 
 </ScrollView>

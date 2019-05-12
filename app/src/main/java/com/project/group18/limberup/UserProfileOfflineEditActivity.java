@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,20 +40,25 @@ import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileOfflineEditActivity extends AppCompatActivity {
 
     // Declaration of Button type Elements
     private Button m_BuddyUpButton = null;
     private Button m_FollowButton = null;
     private Button m_MessageButton = null;
-    private Button m_EditButton = null;
     private ImageView m_ProfilePictureBorder = null;
     private CircleImageView m_ProfilePicture = null;
-    private TextView m_bio = null;
     private TextView m_username = null;
     private Uri filePath = null;
     private User currentUser;
     private String imageUrl;
+
+    private TextView m_name = null;
+    private EditText m_nameParam = null;
+    private TextView m_bio = null;
+    private EditText m_bioPram = null;
+    private Button m_submitBtn = null;
+    private Button m_cancelBtn = null;
 
     private static final int PICK_IMAGE_REQUEST = 71;
 
@@ -60,37 +66,58 @@ public class UserProfileActivity extends AppCompatActivity {
 
     StorageReference storageReference = null;
 
-    //Declaration of TextView type elements
-    private TextView m_FollowerCount = null;
-    private TextView m_BuddyCount = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_edit_profile);
 
         storageReference = FirebaseStorage.getInstance().getReference();
-        //Initialization of Activity elements
-        m_BuddyUpButton = findViewById(R.id.buddy_up_button);
-        m_MessageButton = findViewById(R.id.message_button);
-        m_EditButton = findViewById(R.id.edit_button);
-        m_FollowerCount = findViewById(R.id.follower_count);
-        m_BuddyCount = findViewById(R.id.buddy_count);
+
         m_ProfilePictureBorder = findViewById(R.id.profile_pic_border);
         m_ProfilePicture = findViewById(R.id.profile_picture);
-        m_username = findViewById(R.id.name);
-        m_bio = findViewById(R.id.user_bio);
 
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        if (id != null) {
-            m_EditButton.setVisibility(View.GONE);
-            loadOtherUser(id);
-        } else {
-            loadCurrentUser();
-            m_MessageButton.setVisibility(View.GONE);
-            m_EditButton.setVisibility(View.VISIBLE);
-        }
+        m_name = findViewById(R.id.name);
+        m_nameParam = findViewById(R.id.name_param);
+        m_bio = findViewById(R.id.bio);
+        m_bioPram = findViewById(R.id.bio_param);
+        m_submitBtn = findViewById(R.id.update_button);
+        m_cancelBtn = findViewById(R.id.cancel_button);
+
+        SharedPreferences sharedPref = UserProfileOfflineEditActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", null);
+
+        HashMap params = new HashMap<>();
+        params.put("token", token);
+        Log.i("---->", "setActivities: " + token);
+        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/read", params, (s) -> {
+            try {
+                setUser(new JSONObject(s));
+            } catch (JSONException e) {
+                Log.i("---->", "setActivities: " + e.toString());
+            }
+        }));
+
+        m_submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap params = new HashMap<>();
+                params.put("token", token);
+                params.put("username", m_nameParam.getText().toString());
+                params.put("bio", m_bioPram.getText().toString());
+                params.put("profileImgUrl", imageUrl);
+                ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) -> { }));
+                finish();
+            }
+        });
+
+        m_cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         m_ProfilePictureBorder.setOnClickListener((View v) -> {
             chooseImage();
@@ -122,8 +149,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
     public void setUser(JSONObject userJson) throws JSONException {
         currentUser = new User(userJson);
-        m_username.setText(currentUser.getUsername());
-        m_bio.setText(currentUser.getBio());
+        m_nameParam.setText(currentUser.getUsername());
+        m_bioPram.setText(currentUser.getBio());
         currentUser.setImage(m_ProfilePicture);
     }
 
@@ -142,7 +169,7 @@ public class UserProfileActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(UserProfileActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserProfileOfflineEditActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                 @Override
                                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -168,21 +195,12 @@ public class UserProfileActivity extends AppCompatActivity {
 
                                             @Override
                                             public void onError(Exception e) {
-                                                Toast.makeText(UserProfileActivity.this, "Error: Could not download an image.", Toast.LENGTH_SHORT);
+                                                Toast.makeText(UserProfileOfflineEditActivity.this, "Error: Could not download an image.", Toast.LENGTH_SHORT);
                                             }
                                         });
 
                                         imageUrl = downloadUri.toString();
                                         Log.v("Firebase", imageUrl);
-
-                                        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-                                        String token = sharedPref.getString("token", null);
-                                        HashMap params = new HashMap<>();
-                                        params.put("token", token);
-                                        params.put("profileImgUrl", imageUrl);
-                                        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-                                        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) -> { }));
-
 
                                     } else {
                                         // Handle failures
@@ -197,7 +215,7 @@ public class UserProfileActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(UserProfileActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserProfileOfflineEditActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -210,58 +228,6 @@ public class UserProfileActivity extends AppCompatActivity {
                     });
         }
     }
-
-    public void loadCurrentUser() {
-        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", null);
-        HashMap params = new HashMap<>();
-        params.put("token", token);
-        Log.i("---->", "setActivities: " + token);
-        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/read", params, (s) -> {
-            try {
-                setUser(new JSONObject(s));
-            } catch (JSONException e) {
-                Log.i("---->", "setActivities: " + e.toString());
-            }
-        }));
-
-        m_BuddyUpButton.setText("Friend List");
-        m_BuddyUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("TAG", "onClick: server start");
-                Intent intent = new Intent(UserProfileActivity.this, FriendListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        m_EditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserProfileActivity.this, UserProfileEditActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    public void loadOtherUser(String id) {
-        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", null);
-        HashMap params = new HashMap<>();
-        params.put("_id", id);
-        params.put("token", token);
-        Log.i("---->", "setActivities: " + token);
-        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/find", params, (s) -> {
-            try {
-                setUser(new JSONObject(s));
-            } catch (JSONException e) {
-                Log.i("---->", "setActivities: " + e.toString());
-            }
-        }));
-    }
-
 
 }
 
