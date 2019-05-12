@@ -58,7 +58,7 @@ public class ExploreArrayAdapter extends ArrayAdapter<User>{
         Toast.makeText(getContext(), "Images are downloaded.", Toast.LENGTH_LONG).show();
 
         userName_Age.setText(user.getUsername() + ", "+ user.getAge());
-        userInterests.setText(user.getInterests());
+        userInterests.setText(user.getInterests().toString());
         return view;
     }
 }

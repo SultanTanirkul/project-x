@@ -17,14 +17,14 @@ public class FeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
-        String urlString = "https://www.androidcentral.com/feed";
+        String urlString = "http://ftr.fivefilters.org/makefulltextfeed.php?url=https://rss.cbssports.com/rss/headlines/&max=3&links=preserve";
         Parser parser = new Parser();
         parser.onFinish(new OnTaskCompleted() {
 
             //what to do when the parsing is done
             @Override
             public void onTaskCompleted(List<Article> list) {
-                Log.v("Client", list.get(0).getDescription());
+                Log.v("Client", list.get(1).getDescription());
             }
 
             //what to do in case of error

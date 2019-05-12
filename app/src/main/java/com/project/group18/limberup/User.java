@@ -70,4 +70,6 @@ public class User {
     public void setImage(CircleImageView profilepic){
         Picasso.get().load(this.getImage()).into(profilepic);
     }
+
+
 }

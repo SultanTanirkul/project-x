@@ -53,8 +53,6 @@ public class UserProfileActivity extends AppCompatActivity {
     private User currentUser;
     private String imageUrl;
 
-    private String imageUrl;
-
     private static final int PICK_IMAGE_REQUEST = 71;
 
     Bitmap bitmap;
