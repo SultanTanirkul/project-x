@@ -22,6 +22,7 @@ public class User {
     private String bio       = null;
     private String image     = null;
     private int age          = -1;
+    private ArrayList<Friend> friends = new ArrayList<>();
 
 
     public User(String username, String password, String email, String bio, ArrayList<String> interests, String image, int age){
@@ -34,7 +35,8 @@ public class User {
         this.age = age;
     }
 
-    public User(JSONObject userJson) throws JSONException {
+    public User(JSONObject userJson){
+        try{
         this.id = userJson.getString("_id");
         this.username = userJson.getString("username");
         this.email = userJson.getString("email");
@@ -44,8 +46,7 @@ public class User {
         for(int i = 0; i < interests.size(); i++){
             interests.add(interestsJson.getJSONObject(i).getString("id"));
         }
-        try {
-            this.image = userJson.getString("profileImgUrl");
+        this.image = userJson.getString("profileImgUrl");
         } catch(JSONException e){
             e.printStackTrace();
         }
@@ -59,6 +60,7 @@ public class User {
             userJson.put("bio", this.getBio());
             //userJson.put("interests", this.interests);
             userJson.put("profileImgUrl", this.getImage());
+
             return userJson;
     }
 
@@ -89,7 +91,15 @@ public class User {
         Picasso.get().load(this.getImage()).into(profilepic);
     }
 
+    public String getId(){
+        return this.id;
+    }
+
     public void setImage(String imageUrl){
         this.image = imageUrl;
+    }
+
+    public ArrayList<Friend> getFriends(){
+        return this.friends;
     }
 }

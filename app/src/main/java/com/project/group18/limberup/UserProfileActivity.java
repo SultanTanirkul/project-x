@@ -68,19 +68,6 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", null);
-        HashMap params = new HashMap<>();
-        params.put("token", token);
-        Log.i("---->", "setActivities: " + token);
-        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/read", params, (s) ->{
-            try {
-               setUser(new JSONObject(s));
-            } catch(JSONException e){
-                Log.i("---->", "setActivities: " + e.toString());
-            }
-        }));
         storageReference = FirebaseStorage.getInstance().getReference();
         //Initialization of Activity elements
         m_BuddyUpButton = findViewById(R.id.buddy_up_button);
@@ -92,17 +79,16 @@ public class UserProfileActivity extends AppCompatActivity {
         m_username = findViewById(R.id.name);
         m_bio = findViewById(R.id.user_bio);
 
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        if(id != null){
+            loadOtherUser(id);
+        }else{
+            loadCurrentUser();
+        }
 
         m_ProfilePictureBorder.setOnClickListener((View v) -> {
             chooseImage();
-        });
-
-        //Buddy Up Button's functionality to increase the buddy count if clicked
-        m_BuddyUpButton.setOnClickListener((View v) -> {
-            int buddyCount = Integer.parseInt((m_BuddyCount.getText().toString()));
-
-            buddyCount++;
-            m_BuddyCount.setText(String.valueOf(buddyCount));
         });
     }
 
@@ -224,6 +210,49 @@ public class UserProfileActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    public void loadCurrentUser(){
+        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", null);
+        HashMap params = new HashMap<>();
+        params.put("token", token);
+        Log.i("---->", "setActivities: " + token);
+        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/read", params, (s) ->{
+            try {
+                setUser(new JSONObject(s));
+            } catch(JSONException e){
+                Log.i("---->", "setActivities: " + e.toString());
+            }
+        }));
+
+        m_BuddyUpButton.setText("Friend List");
+        m_BuddyUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("TAG", "onClick: server start");
+                Intent intent = new Intent(UserProfileActivity.this, FriendListActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void loadOtherUser(String id){
+        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", null);
+        HashMap params = new HashMap<>();
+        params.put("_id", id);
+        params.put("token", token);
+        Log.i("---->", "setActivities: " + token);
+        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/find", params, (s) ->{
+            try {
+                setUser(new JSONObject(s));
+            } catch(JSONException e){
+                Log.i("---->", "setActivities: " + e.toString());
+            }
+        }));
     }
 
 
