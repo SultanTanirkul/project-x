@@ -16,18 +16,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FeedActivity"></activity>
-        <activity android:name=".ExploreActivity" />
+        <activity
+            android:name=".NavActivity"
+            android:label="@string/title_activity_nav"
+            android:parentActivityName=".DashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.project.group18.limberup.DashboardActivity" />
+        </activity>
+        <activity android:name=".FeedActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ExploreActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".EventListActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".WebViewActivity" />
-        <activity android:name=".ActivityCategory" />
-        <activity android:name=".EventCreateActivity" />
+        <activity android:name=".EventListActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".DashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".WebViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ActivityCategory"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".EventCreateActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
