@@ -141,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    }
-
     /**
      * Login method
      */
