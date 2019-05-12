@@ -38,7 +38,7 @@ public class ExploreArrayAdapter extends ArrayAdapter<User>{
         User user = users.get(position);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.list_view_explore_layout, null);
+        View view = inflater.inflate(R.layout.item_explore_person, null);
 
         CircleImageView profilePic = view.findViewById(R.id.explore_profile_picture);
         TextView userName_Age = view.findViewById(R.id.explore_user_name_age);

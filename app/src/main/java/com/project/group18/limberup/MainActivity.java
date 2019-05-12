@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
      * Move to the dashboard layout
      */
     private void loggedIn() {
-        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+        Intent intent = new Intent(MainActivity.this, TestingActivity.class);
         startActivity(intent);
         finish();
     }

@@ -29,7 +29,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         Event event = events.get(position);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.list_view_events_layout, null);
+        View view = inflater.inflate(R.layout.item_events_event, null);
 
         TextView title = view.findViewById(R.id.event_title);
         TextView playerNumber =  view.findViewById(R.id.event_player_number);
