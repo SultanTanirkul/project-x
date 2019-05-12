@@ -27,7 +27,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -43,13 +42,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserProfileActivity extends AppCompatActivity {
 
     // Declaration of Button type Elements
-    private Button m_BuddyUpButton           = null;
-    private Button m_MessageButton           = null;
+    private Button m_BuddyUpButton = null;
+    private Button m_FollowButton = null;
+    private Button m_MessageButton = null;
     private ImageView m_ProfilePictureBorder = null;
-    private CircleImageView m_ProfilePicture       = null;
+    private CircleImageView m_ProfilePicture = null;
     private TextView m_bio = null;
     private TextView m_username = null;
-    private Uri filePath                     = null;
+    private Uri filePath = null;
     private User currentUser;
     private String imageUrl;
 
@@ -61,7 +61,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     //Declaration of TextView type elements
     private TextView m_FollowerCount = null;
-    private TextView m_BuddyCount  = null;
+    private TextView m_BuddyCount = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +81,9 @@ public class UserProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
-        if(id != null){
+        if (id != null) {
             loadOtherUser(id);
-        }else{
+        } else {
             loadCurrentUser();
         }
 
@@ -103,39 +103,36 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 uploadImage();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void setUser(JSONObject userJson) throws JSONException{
-        Log.i("---->", "setUser: " + userJson);
+    public void setUser(JSONObject userJson) throws JSONException {
         currentUser = new User(userJson);
         m_username.setText(currentUser.getUsername());
         m_bio.setText(currentUser.getBio());
-        currentUser.setImageView(m_ProfilePicture);
+        currentUser.setImage(m_ProfilePicture);
+        Log.i("---->", "friends count: " + currentUser.getFriends().size());
+        m_BuddyCount.setText("Friends: " + currentUser.getFriends().size());
     }
 
     private void uploadImage() {
 
-        if(filePath != null)
-        {
+        if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             final ProgressBar progressBar = findViewById(R.id.progressBar);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
             UploadTask uploadTask = ref.putFile(filePath);
             uploadTask
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -146,7 +143,7 @@ public class UserProfileActivity extends AppCompatActivity {
                             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                 @Override
                                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                    if(!task.isSuccessful()){
+                                    if (!task.isSuccessful()) {
                                         throw task.getException();
                                     }
                                     return ref.getDownloadUrl();
@@ -157,18 +154,8 @@ public class UserProfileActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         Uri downloadUri = task.getResult();
-                                        SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-                                        String token = sharedPref.getString("token", null);
-                                        currentUser.setImage(downloadUri.toString());
-                                        HashMap<String, String> params = currentUser.toJson();
-                                        params.put("token", token);
-                                        Log.i("--->", "onComplete: updating");
-                                        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-                                        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) ->{
-                                            Log.i("--->", "onComplete: " + s);
-                                        }));
                                         progressBar.setVisibility(View.VISIBLE);
-                                        Picasso.get().load(downloadUri).into(m_ProfilePicture, new Callback() {
+                                        Picasso.get().load(downloadUri).into(m_ProfilePicture, new com.squareup.picasso.Callback() {
                                             @Override
                                             public void onSuccess() {
                                                 if (progressBar != null) {
@@ -198,31 +185,31 @@ public class UserProfileActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(UserProfileActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserProfileActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
                                     .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                            progressDialog.setMessage("Uploaded " + (int) progress + "%");
                         }
                     });
         }
     }
 
-    public void loadCurrentUser(){
+    public void loadCurrentUser() {
         SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String token = sharedPref.getString("token", null);
         HashMap params = new HashMap<>();
         params.put("token", token);
-        Log.i("---->", "setActivities: " + token);
+        Log.i("---->", "setActivities: loading current user");
         ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/read", params, (s) ->{
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/read", params, (s) -> {
             try {
                 setUser(new JSONObject(s));
-            } catch(JSONException e){
+            } catch (JSONException e) {
                 Log.i("---->", "setActivities: " + e.toString());
             }
         }));
@@ -238,22 +225,35 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void loadOtherUser(String id){
+    public void loadOtherUser(String id) {
         SharedPreferences sharedPref = UserProfileActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String token = sharedPref.getString("token", null);
         HashMap params = new HashMap<>();
         params.put("_id", id);
         params.put("token", token);
-        Log.i("---->", "setActivities: " + token);
+        Log.i("---->", "setActivities: loading other user");
         ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/find", params, (s) ->{
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/find", params, (s) -> {
             try {
                 setUser(new JSONObject(s));
-            } catch(JSONException e){
+            } catch (JSONException e) {
                 Log.i("---->", "setActivities: " + e.toString());
             }
         }));
+
+        m_BuddyUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                params.put("token", token);
+                params.put("usertoadd", currentUser.getId());
+                ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/add", params, (s) -> {
+                    m_BuddyUpButton.setText("requested");
+                }));
+            }
+        });
     }
 
 
 }
+

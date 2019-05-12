@@ -30,7 +30,7 @@ public class ExploreArrayAdapter extends ArrayAdapter<User>{
         super(context, resource, users);
         this.context = context;
         this.users = users;
-        Log.v("Client", users.get(1).getUsername());
+       // Log.v("Client", users.get(1).getUsername());
     }
 
     public View getView(int position, View convertView, ViewGroup parent)

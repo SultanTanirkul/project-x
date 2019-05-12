@@ -1,5 +1,6 @@
 package com.project.group18.limberup;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -47,6 +48,7 @@ public class User {
             interests.add(interestsJson.getJSONObject(i).getString("id"));
         }
         JSONArray friendsJson = userJson.getJSONArray("friends");
+        Log.i("---", "User: " + friendsJson.length());
         for(int i = 0; i < friendsJson.length(); i++){
             friends.add(new Friend(friendsJson.getJSONObject(i)));
         }
@@ -91,7 +93,7 @@ public class User {
 
     public int getAge(){return age;}
 
-    public void setImageView(CircleImageView profilepic){
+    public void setImage(CircleImageView profilepic){
         Picasso.get().load(this.getImage()).into(profilepic);
     }
 
@@ -105,5 +107,9 @@ public class User {
 
     public ArrayList<Friend> getFriends(){
         return this.friends;
+    }
+
+    public void setImageView(CircleImageView profilepic){
+        Picasso.get().load(this.getImage()).into(profilepic);
     }
 }
