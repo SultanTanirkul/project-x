@@ -22,7 +22,16 @@
             android:label="@string/title_activity_friend_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ExploreActivity" />
-
+        <activity
+            android:name=".NavActivity"
+            android:label="@string/title_activity_nav"
+            android:parentActivityName=".DashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.project.group18.limberup.DashboardActivity" />
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
