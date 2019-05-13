@@ -105,6 +105,12 @@ public class UserProfileEditActivity extends AppCompatActivity {
                 params.put("token", token);
                 params.put("username", m_nameParam.getText().toString());
                 params.put("bio", m_bioPram.getText().toString());
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("name", m_nameParam.getText().toString());
+                editor.putString("bio",m_bioPram.getText().toString());
+                editor.apply();
+
                 ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
                 serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) -> {
                     Intent intent = new Intent(UserProfileEditActivity.this, TestingActivity.class);

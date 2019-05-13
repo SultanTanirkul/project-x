@@ -47,6 +47,21 @@ public class DashboardActivity extends AppCompatActivity
 
 
         sharedPref = DashboardActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", null);
+
+        Log.i("---->", "Latt: " + sharedPref.getString("offline", ""));
+        if(Integer.parseInt(sharedPref.getString("offline", "false")) == 1){
+            HashMap params = new HashMap<>();
+            params.put("token", token);
+            params.put("username", sharedPref.getString("name", ""));
+            Log.i("---->", "Latt: " + sharedPref.getString("name", ""));
+            params.put("bio", sharedPref.getString("bio", ""));
+            Log.i("---->", "Latt: " + sharedPref.getString("bio", ""));
+
+            ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+            serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) -> { }));
+        }
+
         double myLatitude = 0.0;
         double myLongitude = 0.0;
         if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
@@ -60,7 +75,6 @@ public class DashboardActivity extends AppCompatActivity
             Log.i("---->", "Long: " + myLongitude);
         }
 
-        String token = sharedPref.getString("token", null);
         ServerOp checkTokenReq = ServerOp.getInstance(getApplicationContext());
         Map locationUpdate = new HashMap<>();
         locationUpdate.put("token", token);

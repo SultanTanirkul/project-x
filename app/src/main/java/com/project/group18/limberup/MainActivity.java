@@ -76,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences sharedPref = MainActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
             String token = sharedPref.getString("token", null);
             if (token != null) {
-                // Redirect to offline profile editing
+                Intent intent = new Intent(MainActivity.this, UserProfileOfflineEditActivity.class);
+                startActivity(intent);
+                finish();
             }
             else{
                 m_Username_EditText.setInputType(0);
