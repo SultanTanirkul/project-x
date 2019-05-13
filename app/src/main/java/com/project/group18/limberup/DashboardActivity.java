@@ -29,7 +29,6 @@ public class DashboardActivity extends AppCompatActivity
 
     SharedPreferences sharedPref;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +123,7 @@ public class DashboardActivity extends AppCompatActivity
             Intent intent = new Intent(DashboardActivity.this, DashboardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_activities) {
-            Intent intent = new Intent(DashboardActivity.this, ActivityCategory.class);
+            Intent intent = new Intent(DashboardActivity.this, CategoryActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_explore) {
@@ -135,11 +134,14 @@ public class DashboardActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
             // TODO finish setting
-        } else if (id == R.id.sign_out_button) {
+        } else if (id == R.id.nav_sign_out) {
             sharedPref.edit().clear().commit();
             Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
+        } else if (id == R.id.nav_profile){
+            Intent intent = new Intent(DashboardActivity.this, UserProfileActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
