@@ -27,7 +27,15 @@ public class EventListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
 
-        Button createEventButton = findViewById(R.id.button);
+        Button createEventButton = findViewById(R.id.create_activity_bt);
+        createEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EventListActivity.this, EventCreateActivity.class);
+                startActivity(intent);
+            }
+        });
+
         SharedPreferences sharedPref = EventListActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String token = sharedPref.getString("token", null);
         HashMap params = new HashMap<>();

@@ -42,7 +42,7 @@ public class PendingFriendListAdapter extends ArrayAdapter<User>{
     public View getView(int position, View convertView, ViewGroup parent)
     {
         User user = users.get(position);
-
+        
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_explore_person, null);
 

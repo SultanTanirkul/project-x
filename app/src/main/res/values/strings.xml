@@ -92,4 +92,11 @@
     <string name="title_activity_map_dashboard">Map</string>
 
 
+    <!--Camera Choosing-->
+    <string name="pick_device">Pick the place from where image will be retrieved.</string>
+    <string-array name="device_type">
+        <item>Camera</item>
+        <item>Storage</item>
+    </string-array>
+
 </resources>

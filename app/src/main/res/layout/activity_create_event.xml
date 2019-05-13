@@ -13,7 +13,8 @@
     android:layout_gravity="center|top"
     android:padding="40dp">
 
-        <TextView
+
+    <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/event_create_event_name"

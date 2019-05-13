@@ -82,6 +82,17 @@
                 android:inputType="textMultiLine"
                 android:padding="10dp" />
 
+            <EditText
+                android:id="@+id/dob_params"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_input_bg_login"
+                android:ems="10"
+                android:hint="@string/register_bio"
+                android:inputType="textMultiLine"
+                android:padding="10dp" />
+
         </LinearLayout>
 
         <LinearLayout

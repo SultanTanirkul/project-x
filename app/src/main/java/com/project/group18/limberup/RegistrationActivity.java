@@ -20,13 +20,21 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         Button m_SignUp_Button = findViewById(R.id.registration_button);
-
+        Button m_SignOut_Button = findViewById(R.id.signup_back_button);
         EditText m_Username_EditText = findViewById(R.id.username_params);
         EditText m_Password_EditText = findViewById(R.id.password_params);
         EditText m_Email_EditText = findViewById(R.id.email_params);
         EditText m_Bio_EditText = findViewById(R.id.bio_params);
         EditText m_Interests_EditText = findViewById(R.id.interests_params);
 
+
+
+        m_SignOut_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         m_SignUp_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
