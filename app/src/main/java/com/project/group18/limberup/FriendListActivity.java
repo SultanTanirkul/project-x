@@ -27,13 +27,6 @@ public class FriendListActivity extends AppCompatActivity {
     ListView pendingList;
     ListView requestedList;
 
-public class FriendListActivity extends AppCompatActivity {
-    ArrayList<User> accepted = new ArrayList<>();
-    ArrayList<User> requested = new ArrayList<>();
-    ArrayList<User> pending = new ArrayList<>();
-    ListView acceptedList;
-    ListView pendingList;
-    ListView requestedList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +76,9 @@ public class FriendListActivity extends AppCompatActivity {
     public void setAccepted(JSONArray acceptedJson) {
         try {
             populateList(acceptedJson, accepted);
-            ArrayAdapter<User> acceptedAdapter =  new ExploreArrayAdapter(this, 0, accepted);
+            ArrayAdapter<User> acceptedAdapter = new ExploreArrayAdapter(this, 0, accepted);
             acceptedList.setAdapter(acceptedAdapter);
-        } catch(JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -93,9 +86,9 @@ public class FriendListActivity extends AppCompatActivity {
     public void setPending(JSONArray pendingJson) {
         try {
             populateList(pendingJson, pending);
-            ArrayAdapter<User> pendingAdapter =  new ExploreArrayAdapter(this, 0, pending);
+            ArrayAdapter<User> pendingAdapter = new ExploreArrayAdapter(this, 0, pending);
             pendingList.setAdapter(pendingAdapter);
-        } catch(JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -104,33 +97,34 @@ public class FriendListActivity extends AppCompatActivity {
         try {
             Log.i("----->", "setRequested: ");
             populateList(requestedJson, requested);
-            ArrayAdapter<User> requestedAdapter =  new PendingFriendListAdapter(this, 0, requested);
+            ArrayAdapter<User> requestedAdapter = new PendingFriendListAdapter(this, 0, requested);
             requestedList.setAdapter(requestedAdapter);
-        } catch(JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
     public void setFriends(JSONObject friendsJson, String key) {
-        try{
+        try {
             JSONArray pendingJson = new JSONArray();
             JSONArray acceptedJson = new JSONArray();
             JSONArray requestedJson = new JSONArray();
             try {
                 pendingJson = friendsJson.getJSONArray("pending");
                 Log.i("--->", "added to pending");
-            } catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
                 acceptedJson = friendsJson.getJSONArray("accepted");
                 Log.i("--->", "added to accepted");
-            } catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
                 requestedJson = friendsJson.getJSONArray("requested");
                 Log.i("--->", "added to requested");
-            } catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -138,9 +132,9 @@ public class FriendListActivity extends AppCompatActivity {
             populateList(acceptedJson, accepted);
             populateList(pendingJson, pending);
 
-            ArrayAdapter<User> acceptedAdapter =  new ExploreArrayAdapter(this, 0, accepted);
-            ArrayAdapter<User> pendingAdapter =  new PendingFriendListAdapter(this, 0, pending);
-            ArrayAdapter<User> requestedAdapter =  new ExploreArrayAdapter(this, 0, requested);
+            ArrayAdapter<User> acceptedAdapter = new ExploreArrayAdapter(this, 0, accepted);
+            ArrayAdapter<User> pendingAdapter = new PendingFriendListAdapter(this, 0, pending);
+            ArrayAdapter<User> requestedAdapter = new ExploreArrayAdapter(this, 0, requested);
 
             Log.i("JSONS", "acceptedJson: " + pendingJson.toString());
 
@@ -148,15 +142,16 @@ public class FriendListActivity extends AppCompatActivity {
             pendingList.setAdapter(pendingAdapter);
             requestedList.setAdapter(requestedAdapter);
 
-        } catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<User> populateList (JSONArray listJson, ArrayList friendslist) throws JSONException {
+    public ArrayList<User> populateList(JSONArray listJson, ArrayList friendslist) throws JSONException {
         for (int i = 0; i < listJson.length(); i++) {
             friendslist.add(new User(listJson.getJSONObject(i)));
         }
         return friendslist;
     }
 }
+
