@@ -10,8 +10,6 @@
     tools:openDrawer="start"
     tools:context=".MainActivity">
 
-
-
     <ListView
         android:id="@+id/explore_list_view"
         android:layout_width="match_parent"

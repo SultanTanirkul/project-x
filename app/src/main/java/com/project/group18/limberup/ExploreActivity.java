@@ -57,4 +57,6 @@ public class ExploreActivity extends AppCompatActivity {
 
         exploreListView.setAdapter(adapter);
     }
+
+
 }

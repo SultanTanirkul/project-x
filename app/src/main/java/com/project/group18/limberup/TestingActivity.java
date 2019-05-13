@@ -29,7 +29,6 @@ public class TestingActivity extends AppCompatActivity {
     private Button m_Dashboard_Explore_Button = null;
     private Button m_Dashboard_Feed_Button = null;
 
-    public static final String EXTRA_MESSAGE = "com.project.group18.limberup.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +36,15 @@ public class TestingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing);
 
-        SharedPreferences sharedPref = TestingActivity.this.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
 
         // Initialization of View Elements.
         m_LogOut_Button = findViewById(R.id.sign_out_button);
         m_Event_Invitations_Button = findViewById(R.id.event_invitations);
-        m_Event_Recommendations_Button = findViewById(R.id.event_recommendations);
-        m_Dashboard_Explore_Button = findViewById(R.id.dashboard_explore_button);
         m_Dashboard_Feed_Button = findViewById(R.id.dashboard_feed_button);
 
+        SharedPreferences sharedPref = TestingActivity.this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         double myLatitude = 0.0;
         double myLongitude = 0.0;
         if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {

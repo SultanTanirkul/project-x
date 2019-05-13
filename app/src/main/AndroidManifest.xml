@@ -7,6 +7,7 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,28 +22,32 @@
             android:name=".FriendListActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ExploreActivity" />
+        <activity android:name=".EventActivity"></activity>
         <activity
             android:name=".NavActivity"
             android:label="@string/title_activity_nav"
             android:parentActivityName=".DashboardActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.group18.limberup.DashboardActivity" />
         </activity>
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity android:name=".EventListActivity" />
-        <!--<activity android:name=".DashboardActivity" />-->
+        <activity android:name=".DashboardActivity" />
         <activity android:name=".UserProfileEditActivity" />
         <activity android:name=".UserProfileOfflineEditActivity" />
         <activity android:name=".TestingActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".ActivityCategory" />
         <activity android:name=".EventCreateActivity" />
+
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -61,6 +66,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

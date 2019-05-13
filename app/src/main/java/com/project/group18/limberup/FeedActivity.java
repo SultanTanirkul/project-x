@@ -52,21 +52,20 @@ public class FeedActivity extends AppCompatActivity {
                     Log.v("Client", ""+feedList.size());
 
                 }
-                feedParsed = true;
-
             }
 
             //what to do in case of error
             @Override
             public void onError(Exception e) {
                 Log.e("Client", "Cannot retrieve RSS feed.");
-                feedParsed = true;
                 Toast.makeText(FeedActivity.this, "Feed Cannot be loaded.", Toast.LENGTH_LONG);
             }
         });
-        parser.execute(urlString);
-        while(!feedParsed){}
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         m_RecyclerView.getAdapter().notifyDataSetChanged();
-        feedParsed = false;
     }
 }
