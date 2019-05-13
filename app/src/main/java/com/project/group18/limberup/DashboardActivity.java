@@ -136,6 +136,10 @@ public class DashboardActivity extends AppCompatActivity
             Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
+        }else if(id == R.id.nav_profile)
+        {
+            Intent intent = new Intent(DashboardActivity.this, UserProfileActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

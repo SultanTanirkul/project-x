@@ -1,5 +1,6 @@
 package com.project.group18.limberup;
 
+import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class FeedActivity extends AppCompatActivity {
     private SwipeRefreshLayout refreshLayout;
     private String urlString = "https://feeds.bbci.co.uk/news/health/rss.xml";
     private Parser parser = new Parser();
-
+    private int counter = 2;
 
 
     @Override
@@ -40,7 +41,6 @@ public class FeedActivity extends AppCompatActivity {
         mAdapter = new FeedRecyclerAdapter(feedList, this);
         m_RecyclerView.setLayoutManager(mLayoutManager);
         m_RecyclerView.setAdapter(mAdapter);
-        refreshLayout = findViewById(R.id.feed_activity_swipe_refresh_view);
 
         parser.onFinish(new OnTaskCompleted() {
             //what to do when the parsing is done
@@ -50,22 +50,21 @@ public class FeedActivity extends AppCompatActivity {
                     Log.i("Client", "Works properly");
                     feedList.add(new Feed(f.getTitle(), f.getDescription(), f.getImage().replace("http://", "https://"), f.getLink(), f.getPubDate()));
                     Log.v("Client", ""+feedList.size());
-
                 }
+                feedParsed = true;
             }
-
             //what to do in case of error
             @Override
             public void onError(Exception e) {
                 Log.e("Client", "Cannot retrieve RSS feed.");
-                Toast.makeText(FeedActivity.this, "Feed Cannot be loaded.", Toast.LENGTH_LONG);
+                feedParsed = true;
+                Toast.makeText(FeedActivity.this, "Feed Cannot be loaded.", Toast.LENGTH_LONG).show();
             }
         });
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        parser.execute(urlString);
+        while(!feedParsed){
+            feedParsed = false;
+            mAdapter.notifyDataSetChanged();
         }
-        m_RecyclerView.getAdapter().notifyDataSetChanged();
     }
 }
