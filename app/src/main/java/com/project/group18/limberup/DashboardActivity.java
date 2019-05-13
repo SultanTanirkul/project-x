@@ -19,8 +19,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import com.google.android.gms.maps.model.Dash;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +37,12 @@ public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SharedPreferences sharedPref;
+    ArrayList<Event> events = new ArrayList<>();
+    private ListView eventsListView = null;
+    private ArrayAdapter<Event> eventArrayAdapter = null;
+    private Button mExploreButton = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +50,37 @@ public class DashboardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        Button mapButton = findViewById(R.id.map_button);
+        mExploreButton = findViewById(R.id.find_friends_btn);
+        Event event = new Event(null, "LOUIS'S 5-A-SIDE", null, null, null, 0, 0, "10:30");
+
+        events.add(event);
+        events.add(event);
+        events.add(event);
+        events.add(event);
+        events.add(event);
+        events.add(event);
+
+
+        eventsListView = findViewById(R.id.dashboard_list_view);
+        eventArrayAdapter = new DashboardEventAdapter(this, 0,events);
+        eventsListView.setAdapter(eventArrayAdapter);
+
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, MapDashboardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mExploreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, ExploreActivity.class);
+                startActivity(intent);
+            }
+        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -138,7 +184,7 @@ public class DashboardActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.dashboard_feed_button) {
+        if (id == R.id.nav_dashboard) {
             Intent intent = new Intent(DashboardActivity.this, DashboardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_activities) {
@@ -152,7 +198,8 @@ public class DashboardActivity extends AppCompatActivity
             Intent intent = new Intent(DashboardActivity.this, FeedActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
-            // TODO finish setting
+            Intent intent = new Intent(DashboardActivity.this, SettingsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sign_out) {
             sharedPref.edit().clear().commit();
             Intent intent = new Intent(DashboardActivity.this, MainActivity.class);

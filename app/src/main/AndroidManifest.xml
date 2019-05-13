@@ -51,6 +51,10 @@
             android:name=".MapDashboardActivity"
             android:label="@string/title_activity_map_dashboard"></activity>
         <activity android:name=".FeedActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".PrivacyPolicyActivity" />
+
+
         <activity
             android:name=".FriendListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -69,7 +73,6 @@
         <activity android:name=".DashboardActivity" />
         <activity android:name=".UserProfileEditActivity" />
         <activity android:name=".UserProfileOfflineEditActivity" />
-        <activity android:name=".TestingActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".EventCreateActivity" />

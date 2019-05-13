@@ -113,8 +113,10 @@ public class UserProfileEditActivity extends AppCompatActivity {
 
                 ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
                 serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) -> {
-                    Intent intent = new Intent(UserProfileEditActivity.this, TestingActivity.class);
+                    Intent intent = new Intent(UserProfileEditActivity.this, DashboardActivity.class);
+
                     startActivity(intent);
+                    finish();
                 }));
             }
         });

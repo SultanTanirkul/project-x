@@ -64,7 +64,7 @@ public class PendingFriendListAdapter extends ArrayAdapter<User>{
                 params.put("usertoconfirm", user.getId());
                 ServerOp serverOp = ServerOp.getInstance(context);
                 serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/confirm", params, (s) ->{
-                    Log.i("FRIEND LSIT ADAPTER", "onClick: ");
+                    Log.i("FRIEND LISTT ADAPTER", "onClick: ");
                 }));
             }
         });

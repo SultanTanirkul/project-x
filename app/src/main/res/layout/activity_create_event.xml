@@ -45,6 +45,7 @@
             android:layout_height="200dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:foregroundGravity="top"
             android:background="@drawable/text_input_bg_search"
             android:ems="10"
             android:inputType="textMultiLine"

@@ -1,6 +1,7 @@
 package com.project.group18.limberup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,15 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText m_Bio_EditText = findViewById(R.id.bio_params);
         EditText m_Interests_EditText = findViewById(R.id.interests_params);
         EditText m_dob = findViewById(R.id.dob_text);
+        Button m_PrivacyAndPolicy = findViewById(R.id.privacy_reg_btn);
+
+        m_PrivacyAndPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistrationActivity.this, PrivacyPolicyActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

@@ -1,54 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/item_dot"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/event_item_short"
+    android:layout_gravity="center">
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:src="@drawable/list_item_point"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/block"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/block"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/event_item_short"
-        android:padding="10dp"
-        app:layout_constraintLeft_toRightOf="@id/item_dot"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
+        android:layout_gravity="center"
+        android:padding="10dp">
         <TextView
             android:id="@+id/event_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_gravity="start|center"
             android:text="LOUIS'S 5-side"
             android:textColor="#FFF"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:padding="10dp">
 
         <TextView
-            android:id="@+id/event_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10:30"
-            android:textColor="#EF5757"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/event_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:text="10:30 AM"
+                android:textColor="#EF5757"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+    </LinearLayout>
 
-
-    </android.support.constraint.ConstraintLayout>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

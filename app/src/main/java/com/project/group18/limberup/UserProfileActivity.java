@@ -1,10 +1,8 @@
 package com.project.group18.limberup;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,13 +10,11 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,7 +55,6 @@ public class UserProfileActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     // Declaration of Button type Elements
     private Button m_BuddyUpButton = null;
-    private Button m_FollowButton = null;
     private Button m_MessageButton = null;
     private Button m_EditButton = null;
     private ImageView m_ProfilePictureBorder = null;
@@ -77,7 +72,6 @@ public class UserProfileActivity extends AppCompatActivity {
     StorageReference storageReference = null;
 
     //Declaration of TextView type elements
-    private TextView m_FollowerCount = null;
     private TextView m_BuddyCount = null;
 
     @Override
@@ -90,7 +84,6 @@ public class UserProfileActivity extends AppCompatActivity {
         m_BuddyUpButton = findViewById(R.id.buddy_up_button);
         m_MessageButton = findViewById(R.id.message_button);
         m_EditButton = findViewById(R.id.edit_button);
-        m_FollowerCount = findViewById(R.id.follower_count);
         m_BuddyCount = findViewById(R.id.buddy_count);
         m_ProfilePictureBorder = findViewById(R.id.profile_pic_border);
         m_ProfilePicture = findViewById(R.id.profile_picture);
@@ -158,9 +151,7 @@ public class UserProfileActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             m_ProfilePicture.setImageBitmap(imageBitmap);
-
             Uri tempUri = getImageUri(getApplicationContext(), imageBitmap);
-            File finalFile = new File(getRealPathFromURI(tempUri));
             filePath = tempUri;
             uploadImage();
         }
@@ -289,6 +280,7 @@ public class UserProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(UserProfileActivity.this, UserProfileEditActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
