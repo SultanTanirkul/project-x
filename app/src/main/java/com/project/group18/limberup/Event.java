@@ -53,6 +53,24 @@ public class Event {
         }
     }
 
+    public JSONObject toJson(){
+        try {
+            JSONObject eventJson = new JSONObject();
+            eventJson.put("_id", this.getId());
+            eventJson.put("name", this.getTitle());
+            eventJson.put("host", this.getHost());
+            eventJson.put("activity", this.getActivity());
+            eventJson.put("coordinates", this.getLocation());
+            eventJson.put("time", this.getDate());
+            eventJson.put("description", this.description);
+            eventJson.put("participants", this.participants);
+            return eventJson;
+        } catch(JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public String getId(){return this.id;}
     public String getTitle(){ return this.title;}
     public String getHost(){ return this.host;}
