@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ActivityCategory extends AppCompatActivity {
+public class CategoryActivity extends AppCompatActivity {
     private ArrayList<Activity> activities = new ArrayList<>();
 
 
@@ -27,7 +27,7 @@ public class ActivityCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Button Functionality
         setContentView(R.layout.activity_category);
-        SharedPreferences sharedPref = ActivityCategory.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = CategoryActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String token = sharedPref.getString("token", null);
         HashMap params = new HashMap<>();
         params.put("token", token);
@@ -80,7 +80,7 @@ public class ActivityCategory extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ActivityCategory.this, EventListActivity.class);
+                    Intent intent = new Intent(CategoryActivity.this, EventListActivity.class);
                     intent.putExtra("id", currentActivity.id);
                     intent.putExtra("activity", currentActivity.name);
                     startActivity(intent);

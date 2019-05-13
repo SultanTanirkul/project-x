@@ -87,7 +87,7 @@ public class TestingActivity extends AppCompatActivity {
         });
 
         m_Event_Recommendations_Button.setOnClickListener((View v) -> {
-            Intent intent = new Intent(TestingActivity.this, ActivityCategory.class);
+            Intent intent = new Intent(TestingActivity.this, CategoryActivity.class);
             startActivity(intent);
         });
 

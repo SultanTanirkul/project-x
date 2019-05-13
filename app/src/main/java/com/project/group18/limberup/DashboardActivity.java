@@ -19,6 +19,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.util.HashMap;
@@ -28,7 +31,7 @@ public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SharedPreferences sharedPref;
-
+    private Button map_button = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class DashboardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
+        map_button = findViewById(R.id.map_button);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -45,7 +48,13 @@ public class DashboardActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        map_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, MapDashboardActivity.class);
+                startActivity(intent);
+            }
+        });
         sharedPref = DashboardActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String token = sharedPref.getString("token", null);
 
@@ -134,7 +143,7 @@ public class DashboardActivity extends AppCompatActivity
             Intent intent = new Intent(DashboardActivity.this, DashboardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_activities) {
-            Intent intent = new Intent(DashboardActivity.this, ActivityCategory.class);
+            Intent intent = new Intent(DashboardActivity.this, CategoryActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_explore) {
