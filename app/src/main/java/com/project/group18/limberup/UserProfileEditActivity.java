@@ -203,6 +203,15 @@ public class UserProfileEditActivity extends AppCompatActivity {
                                         imageUrl = downloadUri.toString();
                                         Log.v("Firebase", imageUrl);
 
+                                        SharedPreferences sharedPref = UserProfileEditActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                                        String token = sharedPref.getString("token", null);
+                                        HashMap params = new HashMap<>();
+                                        params.put("token", token);
+                                        params.put("profileImgUrl", imageUrl);
+                                        ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+                                        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) -> { }));
+
+
                                     } else {
                                         // Handle failures
                                         // ...
