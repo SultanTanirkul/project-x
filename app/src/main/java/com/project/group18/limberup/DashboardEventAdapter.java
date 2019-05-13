@@ -49,8 +49,7 @@ public class DashboardEventAdapter extends ArrayAdapter<Event>{
 
         TextView eventTitle = view.findViewById(R.id.event_title);
         TextView eventTime = view.findViewById(R.id.event_date);
-        eventTitle.setText(event.getTitle());
-        eventTime.setText(event.getDate());
+        eventTitle.setText(event.getName());
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

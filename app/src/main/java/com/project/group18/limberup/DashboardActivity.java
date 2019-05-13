@@ -1,4 +1,4 @@
-/*package com.project.group18.limberup;
+package com.project.group18.limberup;
 
 import android.Manifest;
 import android.content.Context;
@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.Dash;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +37,12 @@ import java.util.Map;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
- /*   SharedPreferences sharedPref;
+    SharedPreferences sharedPref;
+    ArrayList<Event> events = new ArrayList<>();
+    private ListView eventsListView = null;
+    private ArrayAdapter<Event> eventArrayAdapter = null;
+    private Button mExploreButton = null;
+
 
 
     @Override
@@ -47,7 +53,7 @@ public class DashboardActivity extends AppCompatActivity
         //setSupportActionBar(toolbar);
         Button mapButton = findViewById(R.id.map_button);
         mExploreButton = findViewById(R.id.find_friends_btn);
-        Event event = new Event(null, "LOUIS'S 5-A-SIDE", null, null, null, 0, 0, "10:30");
+        Event event = new Event(new JSONObject());
 
         events.add(event);
         events.add(event);
@@ -210,4 +216,3 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 }
-*/
