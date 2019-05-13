@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences sharedPref = MainActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("token", response.getString("token"));
+                editor.putString("offline", "0");
                 editor.apply();
                 loggedIn();
 

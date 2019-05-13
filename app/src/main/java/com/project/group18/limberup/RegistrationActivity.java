@@ -26,6 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText m_Email_EditText = findViewById(R.id.email_params);
         EditText m_Bio_EditText = findViewById(R.id.bio_params);
         EditText m_Interests_EditText = findViewById(R.id.interests_params);
+        EditText m_dob = findViewById(R.id.dob_text);
 
 
 
@@ -42,9 +43,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 Map<String, String> userRegisterParams = new HashMap<>();
 
                 userRegisterParams.put("username", m_Username_EditText.getText().toString());
-                Log.v("Test: ", m_Username_EditText.getText().toString());
+                Log.v("User: ", m_Username_EditText.getText().toString());
                 userRegisterParams.put("password", m_Password_EditText.getText().toString());
-                Log.v("Test: ", m_Password_EditText.getText().toString());
+                Log.v("Pass: ", m_Password_EditText.getText().toString());
+                userRegisterParams.put("dob", m_dob.getText().toString());
+                Log.v("DOB: ", m_Password_EditText.getText().toString());
 
                 userRegisterParams.put("email", m_Email_EditText.getText().toString());
                 userRegisterParams.put("bio", m_Bio_EditText.getText().toString());
@@ -53,7 +56,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 SharedPreferences sharedPref = RegistrationActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("offline", "false");
+                editor.putString("offline", "0");
                 editor.putString("name", m_Bio_EditText.getText().toString());
                 editor.putString("bio",m_Bio_EditText.getText().toString());
                 editor.apply();

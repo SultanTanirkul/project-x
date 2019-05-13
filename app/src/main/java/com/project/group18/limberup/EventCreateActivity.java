@@ -172,6 +172,10 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
 
                 createEvent.addToRequestQueue(createEvent.postRequest("https://limberup.herokuapp.com/api/event/create", eventPrams, (s) -> {
                     Log.i("--->", "onClick: " + s);
+                    Toast.makeText(this, "Activity successfully created!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(EventCreateActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
                 }));
             }
         }

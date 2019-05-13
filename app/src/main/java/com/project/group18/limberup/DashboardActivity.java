@@ -79,6 +79,25 @@ public class DashboardActivity extends AppCompatActivity
                 JSONException e) {
             Log.i("---->", "Error: " + e);
         }
+
+        Log.i("---->", "Name update: " + sharedPref.getString("name", ""));
+        if(Integer.parseInt(sharedPref.getString("offline", "0")) == 1){
+            HashMap params = new HashMap<>();
+            params.put("token", token);
+            params.put("username", sharedPref.getString("name", ""));
+            Log.i("---->", "Name update: " + sharedPref.getString("name", ""));
+            params.put("bio", sharedPref.getString("bio", ""));
+            Log.i("---->", "Bio Update: " + sharedPref.getString("bio", ""));
+
+            ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+            serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/update", params, (s) -> { }));
+
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("offline", "0");
+            editor.apply();
+
+        }
+
     }
 
 
