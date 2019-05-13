@@ -10,33 +10,29 @@
             android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_dashboard"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_apps_black_24dp"
             android:title="@string/menu_dashboard" />
         <item
             android:id="@+id/nav_activities"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_fitness_center_black_24dp"
             android:title="@string/menu_activities" />
         <item
             android:id="@+id/nav_explore"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_near_me_black_24dp"
             android:title="@string/menu_explore" />
         <item
             android:id="@+id/nav_feed"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_public_black_24dp"
             android:title="@string/menu_feed" />
-    </group>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/menu_settings" />
+        <item
+            android:id="@+id/nav_sign_out"
+            android:icon="@drawable/ic_keyboard_backspace_black_24dp"
+            android:title="@string/menu_sign_out" />
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_settings" />
-            <item
-                android:id="@+id/nav_sign_out"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_sign_out" />
-        </menu>
-    </item>
+    </group>
 
 </menu>
