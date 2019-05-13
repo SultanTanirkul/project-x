@@ -2,7 +2,9 @@ package com.project.group18.limberup;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,9 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,11 +41,12 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
     private ImageView m_Date_Picker_Button = null;
     private ImageView m_Date_Time_Picker = null;
     private Calendar c = Calendar.getInstance();
-    private EditText m_Time_Text, m_Date_Text, m_Event_Name, m_Min_Player_Number, m_Max_Player_Number;
+    private EditText m_Time_Text, m_Date_Text, m_Event_Name, m_Max_Player_Number, m_event_desc, m_event_title;
     private Button m_Back_button, m_Create_Button;
+    String activity;
 
     private String placeId = null;
-    private LatLng latLng = null;
+    private double[] coordinates = new double[2];
 
     // Date and Time variables
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -49,6 +55,8 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+        m_event_title = findViewById(R.id.create_event_title);
+        m_event_desc = findViewById(R.id.create_event_desc);
         m_Map_Button = findViewById(R.id.create_event_map_button);
         m_Event_location = findViewById(R.id.create_event_location);
         m_Time_Text = findViewById(R.id.create_event_time_text);
@@ -58,9 +66,10 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
         m_Back_button = findViewById(R.id.create_event_back_button);
         m_Create_Button = findViewById(R.id.create_event_create_button);
         m_Event_Name = findViewById(R.id.create_event_title);
-        m_Min_Player_Number = findViewById(R.id.create_event_min_player_number);
         m_Max_Player_Number = findViewById(R.id.create_event_max_player_number);
 
+        Intent intent = getIntent();
+        activity = intent.getStringExtra("activity");
         m_Map_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +82,8 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
         m_Date_Time_Picker.setOnClickListener(this);
         m_Back_button.setOnClickListener(this);
         m_Create_Button.setOnClickListener(this);
+
+
     }
 
 
@@ -137,7 +148,6 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
         {
             if(
                     m_Event_Name.getText().toString().isEmpty()
-                    || m_Min_Player_Number.getText().toString().isEmpty()
                     || m_Event_location.getText().toString().isEmpty()
                     || m_Event_Name.getText().toString().isEmpty()
                     || m_Max_Player_Number.getText().toString().isEmpty()
@@ -145,22 +155,23 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
                     || m_Time_Text.getText().toString().isEmpty())
             {
                 Toast.makeText(this, "To create an activity, every single field must be filled", Toast.LENGTH_LONG).show();
-            }else if(Integer.parseInt(m_Min_Player_Number.getText().toString()) > Integer.parseInt(m_Max_Player_Number.getText().toString())){
-                Toast.makeText(this, "Min Number of Players cannot be greater than Player Limit", Toast.LENGTH_LONG).show();
             }else
             {
+                SharedPreferences sharedPref = EventCreateActivity.this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                String token = sharedPref.getString("token", null);
                 ServerOp createEvent = ServerOp.getInstance(getApplicationContext());
-                Map<String, String> eventPrams = new HashMap<>();
+                HashMap eventPrams = new HashMap<>();
+                eventPrams.put("token", token);
                 eventPrams.put("name", m_Event_Name.getText().toString());
-                eventPrams.put("token", m_Min_Player_Number.getText().toString());
-                eventPrams.put("token", m_Event_Name.getText().toString());
-                eventPrams.put("token", m_Max_Player_Number.getText().toString());
-                eventPrams.put("token", m_Date_Text.getText().toString());
-                eventPrams.put("token", m_Time_Text.getText().toString());
+                eventPrams.put("description", m_event_desc.getText().toString());
+                eventPrams.put("max_player", m_Max_Player_Number.getText().toString());
+                eventPrams.put("time", m_Date_Text.getText().toString());
+                eventPrams.put("lat", Double.toString(coordinates[0]));
+                eventPrams.put("lng", Double.toString(coordinates[1]));
+                eventPrams.put("activity_id", activity);
 
                 createEvent.addToRequestQueue(createEvent.postRequest("https://limberup.herokuapp.com/api/event/create", eventPrams, (s) -> {
-                    Toast.makeText(this, s, Toast.LENGTH_LONG).show();
-
+                    Log.i("--->", "onClick: " + s);
                 }));
             }
         }
@@ -187,7 +198,9 @@ public class EventCreateActivity extends AppCompatActivity implements View.OnCli
                     Place place = response.getPlace();
                     Log.i("Client:", "Place found: " + place.getAddress());
                     m_Event_location.setText(String.valueOf(place.getAddress()));
-                    latLng = place.getLatLng();
+                    LatLng latLng = place.getLatLng();
+                    coordinates[0] = latLng.latitude;
+                    coordinates[1] = latLng.longitude;
                 }).addOnFailureListener((exception) -> {
                     if (exception instanceof ApiException) {
                         ApiException apiException = (ApiException) exception;
