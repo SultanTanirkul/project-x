@@ -125,6 +125,8 @@ public class UserProfileActivity extends AppCompatActivity {
         m_username.setText(currentUser.getUsername());
         m_bio.setText(currentUser.getBio());
         currentUser.setImage(m_ProfilePicture);
+        Log.i("---->", "friends count: " + currentUser.getFriends().size());
+        m_BuddyCount.setText("Friends: " + currentUser.getFriends().size());
     }
 
     private void uploadImage() {
@@ -216,7 +218,7 @@ public class UserProfileActivity extends AppCompatActivity {
         String token = sharedPref.getString("token", null);
         HashMap params = new HashMap<>();
         params.put("token", token);
-        Log.i("---->", "setActivities: " + token);
+        Log.i("---->", "setActivities: loading current user");
         ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
         serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/read", params, (s) -> {
             try {
@@ -251,7 +253,7 @@ public class UserProfileActivity extends AppCompatActivity {
         HashMap params = new HashMap<>();
         params.put("_id", id);
         params.put("token", token);
-        Log.i("---->", "setActivities: " + token);
+        Log.i("---->", "setActivities: loading other user");
         ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
         serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/find", params, (s) -> {
             try {
@@ -260,8 +262,19 @@ public class UserProfileActivity extends AppCompatActivity {
                 Log.i("---->", "setActivities: " + e.toString());
             }
         }));
+
+        m_BuddyUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                params.put("token", token);
+                params.put("usertoadd", currentUser.getId());
+                ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
+                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/add", params, (s) -> {
+                    m_BuddyUpButton.setText("requested");
+                }));
+            }
+        });
     }
 
 
 }
-

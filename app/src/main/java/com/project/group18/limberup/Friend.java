@@ -8,9 +8,13 @@ public class Friend {
     String friend_id;
     String status;
 
-    public Friend(JSONObject friendJson) throws JSONException {
-        id = friendJson.getString("id");
-        friend_id = friendJson.getString("friend_id");
-        status = friendJson.getString("status");
+    public Friend(JSONObject friendJson){
+        try {
+            id = friendJson.getString("_id");
+            friend_id = friendJson.getString("friend_id");
+            status = friendJson.getString("status");
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
     }
 }
