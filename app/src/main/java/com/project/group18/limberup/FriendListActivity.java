@@ -26,6 +26,14 @@ public class FriendListActivity extends AppCompatActivity {
     ListView acceptedList;
     ListView pendingList;
     ListView requestedList;
+
+public class FriendListActivity extends AppCompatActivity {
+    ArrayList<User> accepted = new ArrayList<>();
+    ArrayList<User> requested = new ArrayList<>();
+    ArrayList<User> pending = new ArrayList<>();
+    ListView acceptedList;
+    ListView pendingList;
+    ListView requestedList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,18 +48,69 @@ public class FriendListActivity extends AppCompatActivity {
         HashMap params = new HashMap<>();
         params.put("token", token);
         ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
-        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/read", params, (s) ->{
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/read/accepted", params, (s) -> {
             try {
-                JSONObject response = new JSONObject(s);
-                setFriends(response);
-            } catch(JSONException e){
+                Log.i("---->", "setActivities: " + s);
+                JSONArray response = new JSONArray(s);
+                setAccepted(response);
+            } catch (JSONException e) {
                 Log.i("---->", "setActivities: " + e.toString());
             }
         }));
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/read/requested", params, (s) -> {
+            try {
+                Log.i("---->", "setActivities: " + s);
+                JSONArray response = new JSONArray(s);
+                setRequested(response);
+            } catch (JSONException e) {
+                Log.i("---->", "setActivities: " + e.toString());
+            }
+        }));
+
+        serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/read/pending", params, (s) -> {
+            try {
+                Log.i("---->", "setActivities: " + s);
+                JSONArray response = new JSONArray(s);
+                setPending(response);
+            } catch (JSONException e) {
+                Log.i("---->", "setActivities: " + e.toString());
+            }
+        }));
+
+
     }
 
+    public void setAccepted(JSONArray acceptedJson) {
+        try {
+            populateList(acceptedJson, accepted);
+            ArrayAdapter<User> acceptedAdapter =  new ExploreArrayAdapter(this, 0, accepted);
+            acceptedList.setAdapter(acceptedAdapter);
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public void setFriends(JSONObject friendsJson){
+    public void setPending(JSONArray pendingJson) {
+        try {
+            populateList(pendingJson, pending);
+            ArrayAdapter<User> pendingAdapter =  new ExploreArrayAdapter(this, 0, pending);
+            pendingList.setAdapter(pendingAdapter);
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setRequested(JSONArray requestedJson) {
+        try {
+            Log.i("----->", "setRequested: ");
+            populateList(requestedJson, requested);
+            ArrayAdapter<User> requestedAdapter =  new PendingFriendListAdapter(this, 0, requested);
+            requestedList.setAdapter(requestedAdapter);
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setFriends(JSONObject friendsJson, String key) {
         try{
             JSONArray pendingJson = new JSONArray();
             JSONArray acceptedJson = new JSONArray();
@@ -80,7 +139,7 @@ public class FriendListActivity extends AppCompatActivity {
             populateList(pendingJson, pending);
 
             ArrayAdapter<User> acceptedAdapter =  new ExploreArrayAdapter(this, 0, accepted);
-            ArrayAdapter<User> pendingAdapter =  new ExploreArrayAdapter(this, 0, pending);
+            ArrayAdapter<User> pendingAdapter =  new PendingFriendListAdapter(this, 0, pending);
             ArrayAdapter<User> requestedAdapter =  new ExploreArrayAdapter(this, 0, requested);
 
             Log.i("JSONS", "acceptedJson: " + pendingJson.toString());
@@ -94,8 +153,8 @@ public class FriendListActivity extends AppCompatActivity {
         }
     }
 
-    public ArrayList<User> populateList(JSONArray listJson, ArrayList friendslist) throws JSONException{
-        for(int i = 0; i < listJson.length(); i++){
+    public ArrayList<User> populateList (JSONArray listJson, ArrayList friendslist) throws JSONException {
+        for (int i = 0; i < listJson.length(); i++) {
             friendslist.add(new User(listJson.getJSONObject(i)));
         }
         return friendslist;
