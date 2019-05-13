@@ -33,7 +33,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 ServerOp serverOp = ServerOp.getInstance(getApplicationContext());
                 Map<String, String> userRegisterParams = new HashMap<>();
 
-                userRegisterParams.put("username", m_Bio_EditText.getText().toString());
+                userRegisterParams.put("username", m_Username_EditText.getText().toString());
                 Log.v("Test: ", m_Username_EditText.getText().toString());
                 userRegisterParams.put("password", m_Password_EditText.getText().toString());
                 Log.v("Test: ", m_Password_EditText.getText().toString());
