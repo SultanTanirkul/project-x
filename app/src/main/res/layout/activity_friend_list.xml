@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FriendListActivity">
+    android:layout_height="match_parent">
 
-    <ListView
+    <TextView
         app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/redbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accepted"
+        android:background="#EB5757"
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textSize="16sp" />
+    <ListView
+        app:layout_constraintTop_toBottomOf="@id/redbar3"
         android:id="@+id/acceptedlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,8 +28,8 @@
         app:layout_constraintTop_toBottomOf="@id/acceptedlist"
         android:id="@+id/redbar1"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:text="about me"
+        android:layout_height="wrap_content"
+        android:text="Requested"
         android:background="#EB5757"
         android:padding="5dp"
         android:layout_margin="10dp"
@@ -34,8 +46,8 @@
         app:layout_constraintTop_toBottomOf="@id/requestedList"
         android:id="@+id/redbar2"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:text="about me"
+        android:layout_height="wrap_content"
+        android:text="Pending"
         android:background="#EB5757"
         android:padding="5dp"
         android:layout_margin="10dp"
@@ -50,4 +62,4 @@
         android:layout_height="wrap_content">
     </ListView>
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>

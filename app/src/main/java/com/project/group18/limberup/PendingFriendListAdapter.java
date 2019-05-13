@@ -3,6 +3,8 @@ package com.project.group18.limberup;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,16 +19,20 @@ import com.google.android.gms.maps.model.Circle;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ExploreArrayAdapter extends ArrayAdapter<User>{
+public class PendingFriendListAdapter extends ArrayAdapter<User>{
     private Context context = null;
     private List<User> users = null;
 
-    public ExploreArrayAdapter(Context context, int resource, ArrayList<User> users){
+    public PendingFriendListAdapter(Context context, int resource, ArrayList<User> users){
         super(context, resource, users);
         this.context = context;
         this.users = users;
@@ -51,10 +57,15 @@ public class ExploreArrayAdapter extends ArrayAdapter<User>{
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("---->", "onClick: created on click listener");
-                Intent intent = new Intent(context, UserProfileActivity.class);
-                intent.putExtra("id", user.getId());
-                context.startActivity(intent);
+                SharedPreferences sharedPref = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                String token = sharedPref.getString("token", null);
+                HashMap params = new HashMap<>();
+                params.put("token", token);
+                params.put("usertoconfirm", user.getId());
+                ServerOp serverOp = ServerOp.getInstance(context);
+                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/confirm", params, (s) ->{
+                    Log.i("FRIEND LSIT ADAPTER", "onClick: ");
+                }));
             }
         });
         return view;

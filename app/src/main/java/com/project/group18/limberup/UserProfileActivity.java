@@ -238,6 +238,17 @@ public class UserProfileActivity extends AppCompatActivity {
                 Log.i("---->", "setActivities: " + e.toString());
             }
         }));
+
+        m_BuddyUpButton.setText("add friend");
+        m_BuddyUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                params.put("usertoadd", currentUser.getId());
+                serverOp.addToRequestQueue(serverOp.postRequest("https://limberup.herokuapp.com/api/user/friend/add", params, (s) -> {
+                    m_BuddyUpButton.setText("requested");
+                }));
+            }
+        });
     }
 
 
