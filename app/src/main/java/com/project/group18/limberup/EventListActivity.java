@@ -67,7 +67,7 @@ public class EventListActivity extends AppCompatActivity {
 
         for(int i = 0; i < response.length(); i++){
             events.add(new Event(response.getJSONObject(i)));
-            Log.i("TAG", "setEvents: " + events.get(i).getTitle());
+            Log.i("TAG", "setEvents: " + events.get(i).getName());
         }
         ArrayAdapter<Event> adapter =  new EventArrayAdapter(this, 0, events);
 

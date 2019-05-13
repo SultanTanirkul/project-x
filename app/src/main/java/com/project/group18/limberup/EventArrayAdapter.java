@@ -40,18 +40,16 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         TextView date =  view.findViewById(R.id.event_date);
         ConstraintLayout constraintLayout = view.findViewById(R.id.block);
 
-        constraintLayout.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), EventActivity.class);
+                intent.putExtra("event_id", event.getId());
                 getContext().startActivity(intent);
             }
         });
 
-        title.setText(event.getTitle());
-        playerLimit.setText(String.valueOf(event.getPlayerLimit()));
-        location.setText(event.getLocation()[0] + ", " + event.getLocation()[1]);
-        date.setText(event.getDate());
+        title.setText(event.getName());
 
         return view;
     }

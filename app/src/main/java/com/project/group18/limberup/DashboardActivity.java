@@ -1,4 +1,4 @@
-package com.project.group18.limberup;
+/*package com.project.group18.limberup;
 
 import android.Manifest;
 import android.content.Context;
@@ -36,12 +36,7 @@ import java.util.Map;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    SharedPreferences sharedPref;
-    ArrayList<Event> events = new ArrayList<>();
-    private ListView eventsListView = null;
-    private ArrayAdapter<Event> eventArrayAdapter = null;
-    private Button mExploreButton = null;
-
+ /*   SharedPreferences sharedPref;
 
 
     @Override
@@ -215,3 +210,4 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 }
+*/
