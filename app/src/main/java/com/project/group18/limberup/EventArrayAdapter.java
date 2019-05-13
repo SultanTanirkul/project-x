@@ -2,6 +2,8 @@ package com.project.group18.limberup;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +38,18 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         TextView location =  view.findViewById(R.id.event_location);
         TextView playerLimit =  view.findViewById(R.id.event_player_limit);
         TextView date =  view.findViewById(R.id.event_date);
+        ConstraintLayout constraintLayout = view.findViewById(R.id.block);
 
-        title.setText(event.getTitle());
-        playerLimit.setText(String.valueOf(event.getPlayerLimit()));
-        location.setText(event.getLocation()[0] + ", " + event.getLocation()[1]);
-        date.setText(event.getDate());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), EventActivity.class);
+                intent.putExtra("event_id", event.getId());
+                getContext().startActivity(intent);
+            }
+        });
+
+        title.setText(event.getName());
 
         return view;
     }
